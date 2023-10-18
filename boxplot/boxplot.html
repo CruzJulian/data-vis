@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Boxplot</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="boxplot_files/libs/clipboard/clipboard.min.js"></script>
+<script src="boxplot_files/libs/quarto-html/quarto.js"></script>
+<script src="boxplot_files/libs/quarto-html/popper.min.js"></script>
+<script src="boxplot_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="boxplot_files/libs/quarto-html/anchor.min.js"></script>
+<link href="boxplot_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="boxplot_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="boxplot_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="boxplot_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="boxplot_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Boxplot</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="first-explanation" class="level1">
+<h1>First explanation</h1>
+<p><strong>Median (Q2):</strong> The median is the middle value of the dataset when it’s sorted in ascending order. It represents the central tendency of the data and is shown as a line inside the box.</p>
+<p><strong>Quartiles (Q1 and Q3):</strong> The interquartile range (IQR) is the range between the first quartile (Q1) and the third quartile (Q3). The box in the box plot represents the IQR.</p>
+<p><strong>Whiskers:</strong> The whiskers extend from the box to the minimum and maximum values within a certain range. The range can be defined in different ways:</p>
+<ul>
+<li><p><strong>Mild outliers:</strong> Whiskers extend to 1.5 times the IQR from the quartiles, and data points beyond that range are considered outliers.</p></li>
+<li><p><strong>Extreme outliers:</strong> Whiskers extend to 3 times the IQR from the quartiles, and data points beyond that range are considered extreme outliers.</p></li>
+<li><p><strong>Data range:</strong> Whiskers extend to the minimum and maximum data values within the dataset.</p></li>
+</ul>
+<p><strong>Outliers:</strong> Outliers are individual data points that fall outside the range defined by the whiskers. They are often represented as individual points on the plot.</p>
+<p>How to Read a Box Plot:</p>
+<ul>
+<li><p>The box represents the interquartile range (IQR), with the bottom and top edges of the box representing the first (Q1) and third (Q3) quartiles.</p></li>
+<li><p>The line inside the box represents the median (Q2).</p></li>
+<li><p>The whiskers extend from the box to show the range of non-outlier data points.</p></li>
+<li><p>Outliers, if present, are typically shown as individual points beyond the whiskers.</p></li>
+</ul>
+<p>Uses of Box Plots:</p>
+<ul>
+<li><p><strong>Data Distribution Visualization:</strong> Box plots provide a quick and clear visualization of the spread and central tendency of data.</p></li>
+<li><p><strong>Identifying Outliers:</strong> They are useful for identifying potential outliers in a dataset.</p></li>
+<li><p><strong>Comparing Distributions:</strong> Box plots are valuable for comparing the distributions of multiple datasets side by side.</p></li>
+<li><p><strong>Summary Statistics:</strong> They display important summary statistics (median, quartiles, and potential outliers) in a compact format.</p></li>
+<li><p><strong>Data Quality Assessment:</strong> Box plots can help assess the quality and consistency of data.</p></li>
+</ul>
+<p>In summary, a box plot is a visual representation of data that displays key statistics about the dataset’s distribution. It’s a valuable tool for understanding the central tendency, spread, and potential outliers in your data, making it a common choice in statistical analysis and data visualization.</p>
+<section id="visual-alphabet" class="level2">
+<h2 class="anchored" data-anchor-id="visual-alphabet">Visual alphabet</h2>
+<p><strong>Multiplicity:</strong> A box plot can represent the multiplicity of data distributions when used to compare multiple datasets side by side. Each box plot can show the characteristics of a different dataset, enabling the viewer to understand the multiplicity of distributions.</p>
+<p><strong>Position:</strong> The position of the box plot on an axis represents the location of the data, while the vertical positioning of elements like the box and whiskers reflects quartiles and the median, conveying central tendencies and data distribution.</p>
+<p><strong>Length:</strong> The length of the whiskers represents the range of non-outlier data points. A longer whisker indicates a wider range of data, while the height of the box signifies the interquartile range (IQR).</p>
+<p><strong>Angle:</strong> The box plot is typically a 2D representation, so angles are not a primary visual element used in its construction.</p>
+<p><strong>Area:</strong> The area of the box visually represents the interquartile range (IQR), providing insight into the concentration and spread of data within the central 50% of the dataset.</p>
+<p><strong>Color:</strong> While box plots are traditionally displayed in monochromatic or grayscale, color can be used to highlight specific data or to differentiate between multiple box plots when comparing datasets.</p>
+<p><strong>Opacity:</strong> Opacity, or transparency, is not commonly used in traditional box plots but could be applied to add layers of information or emphasize specific data points when used in more advanced visualization techniques.</p>
+<p><strong>3D:</strong> Box plots are traditionally created in a 2D format, but in some advanced visualization contexts, 3D representations might be employed to illustrate more complex data distributions.</p>
+<p><strong>Shape:</strong> The shape of a box plot is primarily rectangular, consisting of a box, whiskers, and potentially individual data points for outliers.</p>
+<p><strong>Texture:</strong> Texture is not commonly applied to box plots; however, texture could be used to provide additional visual information in more complex graphical presentations.</p>
+<p><strong>Orientation:</strong> The orientation of a box plot is typically vertical, with the box and whiskers extending vertically along an axis. However, they can also be displayed horizontally, depending on the context of the data presentation.</p>
+</section>
+</section>
+<section id="programming" class="level1">
+<h1>Programming</h1>
+<p>First we can configure the environment for mixed programming. Using another engine will need another setup.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"reticulate"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># reticulate::install_miniconda()</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">use_python</span>(<span class="fu">file.path</span>(<span class="fu">miniconda_path</span>(), <span class="st">"bin"</span>, <span class="st">"python3.11"</span>))</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># py_install("pandas")</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># py_install("matplotlib")</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># py_install("seaborn")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"knitr"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>opts_chunk<span class="sc">$</span><span class="fu">set</span>(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">fig.width =</span> <span class="dv">6</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">fig.height =</span> <span class="dv">4</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">message =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">warning =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">echo =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">results =</span> <span class="st">"asis"</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggplot2"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"magrittr"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"dplyr"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">%&lt;&gt;%</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="dv">5000</span>) <span class="co"># disminuir los datos p</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># diamonds %&gt;% </span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   glimpse</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.colors</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># You can uncomment this line to change the style of the graphs.</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.style.use('ggplot')</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>diamonds <span class="op">=</span> r.diamonds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="using-r-base" class="level2">
+<h2 class="anchored" data-anchor-id="using-r-base">Using r-base</h2>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(diamonds[[<span class="st">"price"</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="boxplot_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="576"></p>
+<p><strong>boxplot():</strong> This is a function in R used to create a boxplot, a graphical representation of the distribution of a dataset.</p>
+<p><strong>diamonds[[“price”]]:</strong> This part of the code accesses the “price” column of the “diamonds” dataset. In R, the double square brackets [[]] are used to extract a single column as a vector.</p>
+</section>
+<section id="using-ggplot" class="level2">
+<h2 class="anchored" data-anchor-id="using-ggplot">Using ggplot</h2>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds) <span class="sc">+</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">y =</span> price) <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="boxplot_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="576"></p>
+<p>Explanation of ggplot implemntation, step-by-Step Breakdown:</p>
+<p><strong>ggplot(diamonds):</strong> This initializes a ggplot2 plot and specifies the dataset diamonds as the data source for the plot. It tells ggplot to use the “diamonds” dataset for visualization.</p>
+<p><strong>aes(y = price):</strong> This line sets up the aesthetic mappings for the plot. It specifies that the “price” column from the dataset should be mapped to the y-axis, which is the vertical axis of the plot. This means that the values from the “price” column will be displayed on the y-axis of the boxplot.</p>
+<p><strong>geom_boxplot():</strong> This adds a boxplot geometry to the plot. It tells ggplot2 to create a boxplot using the data and aesthetic mappings you’ve specified. The boxplot will display the distribution of the “price” values from the “diamonds” dataset, showing key statistics like the median, quartiles, and potential outliers.</p>
+</section>
+<section id="using-pandas" class="level2">
+<h2 class="anchored" data-anchor-id="using-pandas">Using pandas</h2>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>diamonds.plot.box(column<span class="op">=</span><span class="st">"price"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="boxplot_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="576"></p>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plt.close()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Explanation of pandas plotting</p>
+<p><strong>plt.figure():</strong> This function call creates a new figure for the plot. In Matplotlib, a figure is essentially a container that holds one or more plots or visualizations. When you call plt.figure(), you create a new blank canvas for your plot.</p>
+<p><strong>diamonds.plot.box(column=“price”):</strong> This line generates a boxplot for the “price” column of the “diamonds” dataset using Pandas’ built-in plotting function. The column parameter specifies the column from the DataFrame to be used for creating the boxplot. This line will create the boxplot and set it up within the current figure.</p>
+<p><strong>plt.show():</strong> This function call displays the plot. After setting up the figure and creating the boxplot, plt.show() is necessary to actually render the plot and show it on your screen.</p>
+<p><strong>plt.close():</strong> This function call closes the current figure that was created by plt.boxplot(). It’s generally a good practice to close figures when you’re done with them to avoid any unexpected interactions between different plots or figures.</p>
+</section>
+<section id="using-seaborn" class="level2">
+<h2 class="anchored" data-anchor-id="using-seaborn">Using seaborn</h2>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>sns.boxplot(y<span class="op">=</span><span class="st">'price'</span>, data<span class="op">=</span>diamonds)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="boxplot_files/figure-html/unnamed-chunk-8-3.png" class="img-fluid" width="576"></p>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>plt.close()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Explanation of seaborn use</p>
+<p><strong>sns.boxplot:</strong> This part of the code is a function call that creates a boxplot using the Seaborn (sns) library. A boxplot is a graphical representation of the distribution of a dataset.</p>
+<p><strong>y=‘price’:</strong> This part specifies the column “price” to be plotted on the y-axis (vertical axis) of the boxplot. It tells Seaborn to use the values from the “price” column of the dataset for the y-axis.</p>
+<p><strong>data=diamonds:</strong> This part specifies the dataset to be used for creating the boxplot. The variable “diamonds” is assumed to be a DataFrame or a data source containing the dataset you want to visualize. The “price” column from this dataset is plotted.</p>
+<p><strong>plt.show():</strong> This line is a function call from the Matplotlib (plt) library. It is used to display the plot generated by Seaborn. After you create the boxplot, you need to call plt.show() to render the plot and show it on your screen.</p>
+<p><strong>plt.close():</strong> This function call closes the current figure that was created by plt.boxplot(). It’s generally a good practice to close figures when you’re done with them to avoid any unexpected interactions between different plots or figures.</p>
+</section>
+<section id="using-matplotlib" class="level2">
+<h2 class="anchored" data-anchor-id="using-matplotlib">Using matplotlib</h2>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>plt.boxplot(diamonds[<span class="st">'price'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>{‘whiskers’: [&lt;matplotlib.lines.Line2D object at 0x7f46bc18fd10&gt;, &lt;matplotlib.lines.Line2D object at 0x7f46bf9fe350&gt;], ‘caps’: [&lt;matplotlib.lines.Line2D object at 0x7f46bc1614d0&gt;, &lt;matplotlib.lines.Line2D object at 0x7f46bc161890&gt;], ‘boxes’: [&lt;matplotlib.lines.Line2D object at 0x7f46bc18d390&gt;], ‘medians’: [&lt;matplotlib.lines.Line2D object at 0x7f46bc162510&gt;], ‘fliers’: [&lt;matplotlib.lines.Line2D object at 0x7f46bc163a90&gt;], ‘means’: []}</p>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="boxplot_files/figure-html/unnamed-chunk-9-5.png" class="img-fluid" width="576"></p>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>plt.close()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>How it works</p>
+<p><strong>plt.boxplot:</strong> This is a function call from the Matplotlib library (typically aliased as plt) that creates a boxplot. A boxplot is a graphical representation of the distribution of a dataset.</p>
+<p><strong>diamonds[‘price’]:</strong> This part specifies the data that you want to visualize in the boxplot. It accesses the “price” column from the “diamonds” dataset (assuming “diamonds” is a DataFrame or a similar data structure).</p>
+<p><strong>plt.show():</strong> This line is a function call from the Matplotlib (plt) library. It is used to display the plot generated by Seaborn. After you create the boxplot, you need to call plt.show() to render the plot and show it on your screen.</p>
+<p><strong>plt.close():</strong> This function call closes the current figure that was created by plt.boxplot(). It’s generally a good practice to close figures when you’re done with them to avoid any unexpected interactions between different plots or figures.</p>
+</section>
+<section id="comparing-subsets" class="level2">
+<h2 class="anchored" data-anchor-id="comparing-subsets">Comparing subsets</h2>
+<p>Boxplots are good for comparing subsets because they provide a clear visual summary of the distribution, central tendency, and variability within each subset, making it easy to identify differences and patterns at a glance.</p>
+</section>
+<section id="using-r-base-1" class="level2">
+<h2 class="anchored" data-anchor-id="using-r-base-1">Using r-base</h2>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(price <span class="sc">~</span> cut, <span class="at">data =</span> diamonds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="boxplot_files/figure-html/unnamed-chunk-10-7.png" class="img-fluid" width="576"></p>
+</section>
+<section id="using-ggplot-1" class="level2">
+<h2 class="anchored" data-anchor-id="using-ggplot-1">Using ggplot</h2>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds) <span class="sc">+</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> cut, <span class="at">y =</span> price) <span class="sc">+</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="boxplot_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="576"></p>
+</section>
+<section id="using-pandas-1" class="level2">
+<h2 class="anchored" data-anchor-id="using-pandas-1">Using pandas</h2>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>diamonds.plot.box(column<span class="op">=</span><span class="st">"price"</span>, by <span class="op">=</span> <span class="st">"cut"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>price Axes(0.125,0.11;0.775x0.77) dtype: object</p>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="boxplot_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="576"></p>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>plt.close()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="using-seaborn-1" class="level2">
+<h2 class="anchored" data-anchor-id="using-seaborn-1">Using seaborn</h2>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>sns.boxplot(y<span class="op">=</span><span class="st">"price"</span>, x<span class="op">=</span><span class="st">"cut"</span>, data<span class="op">=</span>diamonds)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="boxplot_files/figure-html/unnamed-chunk-13-3.png" class="img-fluid" width="576"></p>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>plt.close()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="using-matplotlib-1" class="level2">
+<h2 class="anchored" data-anchor-id="using-matplotlib-1">Using matplotlib</h2>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>ls_price_cut <span class="op">=</span> diamonds.groupby(<span class="st">"cut"</span>)[<span class="st">"price"</span>].<span class="bu">apply</span>(<span class="bu">list</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>cut_labels <span class="op">=</span> diamonds[<span class="st">"cut"</span>].unique()</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> plt.boxplot(x <span class="op">=</span> ls_price_cut, labels <span class="op">=</span> cut_labels)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="boxplot_files/figure-html/unnamed-chunk-14-5.png" class="img-fluid" width="576"></p>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>plt.close()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="using-boxplots-for-margins" class="level2">
+<h2 class="anchored" data-anchor-id="using-boxplots-for-margins">Using boxplots for margins</h2>
+<p>r-base code</p>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">layout</span>(</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">mat =</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">3</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span>),</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>),    </span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">widths =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  )     </span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="at">bty =</span> <span class="st">"l"</span>, <span class="at">yaxt=</span><span class="st">"s"</span>, <span class="at">xaxt=</span><span class="st">"s"</span>)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(price <span class="sc">~</span> carat, <span class="at">data =</span> diamonds)</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">bty =</span> <span class="st">"n"</span>, <span class="at">yaxt=</span><span class="st">"n"</span>, <span class="at">xaxt=</span><span class="st">"n"</span>)</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">0</span>))</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(diamonds[[<span class="st">"carat"</span>]], <span class="at">horizontal =</span> <span class="cn">TRUE</span>,  <span class="at">bty =</span> <span class="st">"n"</span>)</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(diamonds[[<span class="st">"price"</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="boxplot_files/figure-html/unnamed-chunk-15-7.png" class="img-fluid" width="576"></p>
+<p>ggplot code</p>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds) <span class="sc">+</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price)) <span class="sc">+</span> </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> <span class="dv">25000</span>), <span class="at">width =</span> <span class="dv">2500</span>) <span class="sc">+</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">6</span>, <span class="at">y =</span> price)) <span class="sc">+</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="boxplot_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="576"></p>
+<p>pandas code</p>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(nrows<span class="op">=</span><span class="dv">2</span>, ncols<span class="op">=</span><span class="dv">2</span>, width_ratios <span class="op">=</span> [<span class="dv">8</span>, <span class="dv">2</span>], height_ratios <span class="op">=</span> [<span class="dv">2</span>, <span class="dv">8</span>])</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>fig.patch.set_visible(<span class="va">False</span>)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>diamonds.plot.scatter(<span class="st">"carat"</span>, <span class="st">"price"</span>, ax <span class="op">=</span> axes[<span class="dv">1</span>, <span class="dv">0</span>])</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>diamonds.plot.box(column <span class="op">=</span> <span class="st">"carat"</span>, vert <span class="op">=</span> <span class="va">False</span>, ax <span class="op">=</span> axes[<span class="dv">0</span>, <span class="dv">0</span>])</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>diamonds.plot.box(column <span class="op">=</span> <span class="st">"price"</span>, ax <span class="op">=</span> axes[<span class="dv">1</span>, <span class="dv">1</span>])</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="co"># axes.any().axis("off")</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="co"># axes.all().axis("off")</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">0</span>].axis(<span class="st">"off"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>(0.04899999999999999, 3.3710000000000004, 0.5, 1.5)</p>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>, <span class="dv">1</span>].axis(<span class="st">"off"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>(0.5, 1.5, -578.9000000000001, 19680.9)</p>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">1</span>].axis(<span class="st">"off"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>(0.0, 1.0, 0.0, 1.0)</p>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="boxplot_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="576"></p>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>plt.close()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

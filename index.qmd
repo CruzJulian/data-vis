@@ -1,0 +1,477 @@
+---
+title: "data-vis"
+---
+
+# Package graphics
+
+## What is
+
+The default package for creating graphics in R is called "graphics." This package comes pre-installed with the basic R libraries and is known for its versatility in producing high-quality graphics.
+
+In R, "graphics" is a built-in package that provides a wide range of functions and tools for creating various types of plots and charts. It's commonly used for basic data visualization tasks, making it a handy choice for creating simple yet effective graphics. Since it's included in the standard R installation, you don't need to install any additional packages to start using it.
+
+Here are some key points about the "graphics" package in R:
+
+ - Default Graphics Package: When you start working with R, you can use the "graphics" package without any additional installations. It's the go-to choice for basic plotting and graphing.
+
+ - Versatility: The "graphics" package offers a versatile set of functions that allow you to create a wide range of plots, including scatter plots, bar charts, histograms, and more. You can customize these plots to suit your specific needs.
+
+ - Good-Quality Graphics: While "graphics" is a basic graphics package, it is capable of producing high-quality graphics for data visualization and exploration. It may not have all the advanced features of specialized packages, but it gets the job done for many common plotting tasks.
+
+## How it works
+
+The "graphics" package in R is a fundamental tool for creating a wide variety of plots and charts. It has a well-defined structure consisting of several functions that allow you to create and customize plots. Here, we'll delve deeper into the structure of the "graphics" package using the provided text.
+
+```{r, eval = FALSE}
+# Functions for plotting
+
+plot()
+barplot()
+boxplot()
+hist()
+contour()
+assocplot()
+pairs()
+pie()
+polygon()
+persp()
+
+# helpers
+
+lines()
+abline()
+
+title()
+legend()
+text()
+
+
+```
+
+
+
+Functions for Plot Creation:
+
+The core of the "graphics" package is its collection of functions for creating plots. These functions are designed to work primarily with vectors, although they can also work with data structures. These functions are the building blocks for generating different types of visualizations in R.
+
+Working with Vectors and Data:
+
+The functions within the "graphics" package are primarily designed to work with vectors, which are one-dimensional data structures. Vectors can represent numerical or categorical data. These functions can take vectors as input to create a wide range of plots, such as scatter plots, line charts, histograms, and more.
+
+Customizable Plots:
+
+One of the key features of the "graphics" package is its ability to customize plots. You can control various aspects of the visualizations, including colors, labels, axes, titles, and more. This level of customization allows you to tailor the plots to your specific needs.
+
+Extensibility:
+
+While the "graphics" package offers a wide range of plotting functions, it's also extensible. This means you can build more complex visualizations by combining these basic functions and adding additional elements to your plots. This extensibility allows for creative and sophisticated data visualization.
+
+## Common Plot Types:
+
+The package provides functions for creating common types of plots, including:
+
+ - Scatter Plots: Visualizing the relationship between two variables.
+
+ - Line Charts: Representing data trends over time or another continuous variable.
+
+ - Bar Charts: Showing categorical data with bars.
+
+ - Histograms: Displaying the distribution of continuous data.
+
+ - Box Plots: Illustrating the distribution and variability of data.
+
+ - Pie Charts: Representing parts of a whole.
+
+## Further reading
+
+Read [the documentation of the package](https://stat.ethz.ch/R-manual/R-devel/library/graphics/html/00Index.html)
+
+Visit [The R Graph Gallery](https://r-graph-gallery.com/) to view a collection of charts made with the graphics package.
+
+# Package ggplot2
+
+
+## What is
+
+Based on the PhD wor of [Hadley Wickham](https://byrneslab.net/classes/biol607/readings/wickham_layered-grammar.pdf), **ggplot2** is a widely used and powerful R package for creating data visualizations. It was created by Hadley Wickham and is based on the "Grammar of Graphics" concept. Here's a comprehensive explanation of the ggplot2 package:
+
+1. Grammar of Graphics: ggplot2 is based on the Grammar of Graphics, an abstract framework for describing and constructing data visualizations. This concept breaks down the process of creating plots into distinct components, making it highly flexible and customizable.
+
+2. High-Level Plotting: ggplot2 is known for its high-level approach to plotting. Instead of specifying each detail of a plot individually, you describe the plot in terms of data and mappings, and ggplot2 handles the details automatically.
+
+3. Layered Approach: In ggplot2, you build plots by adding layers, starting with a data source and progressively adding components like geoms (geometric objects representing data points), aesthetic mappings, and statistical transformations. This layering approach allows for complex and informative visualizations.
+
+4. Data-Driven Aesthetics: ggplot2 allows you to map data variables to aesthetics, such as color, size, shape, and position. This data-driven approach enables you to create visualizations that reveal patterns and relationships in your data.
+
+5. Extensive Geometric Objects: The package provides a wide range of geometric objects (geoms) that allow you to represent your data in various ways. Common geoms include points, lines, bars, and text labels, but there are many more to choose from.
+
+6. Faceting: ggplot2 supports faceting, which is the process of creating multiple plots based on a categorical variable in your data. This allows you to explore how different categories affect your visualizations.
+
+7. Themes and Customization: ggplot2 provides themes that allow you to customize the appearance of your plots. You can change fonts, colors, grid lines, and more to match your preferred style or to adhere to specific branding requirements.
+
+8. Statistical Transformations: The package offers a variety of statistical transformations that can be applied to your data before plotting. For example, you can calculate summary statistics like means, medians, or quantiles within your plot.
+
+9. Elegant Code: ggplot2 encourages clean and elegant code through its layered structure and use of the pipe operator (%>%), making it easier to read and understand complex visualizations.
+
+10. Data Exploration and Communication: ggplot2 is a valuable tool for both data exploration and communication. It allows you to quickly generate meaningful visualizations for data analysis, as well as create publication-ready graphics for reports and presentations.
+
+## How it works
+
+The layering system can be confusing initially, which has led to explanations that are not entirely accurate. In this regard, it is important to ensure that you fully understand ggplot2's layering system before attempting to explain it to others.
+
+![Wrong layer system of ggplot 2.](ggplot_layers.jpeg)
+
+
+The code structure of ggplot2:
+
+```{}
+Create a plot with:
+  One layer that includes:
+    Data
+    Statistics
+    Aesthetic components
+    Geometry
+  Another layer that includes:
+    Data
+    Statistics
+    Aesthetic components
+    Geometry
+  Refinements to the plot
+  Styling
+
+```
+
+
+```{r, eval = FALSE}
+ggplot(...) +
+  layer(...) +
+  layer(...) +
+  helper(...) +
+  helper(...) +
+  theme(...)
+
+```
+
+It is a cake.
+
+![Correct layer system of ggplot 2.](ggplot2_layer.jpeg)
+
+
+
+## Further reading
+
+Read [the documentation of the package](https://stat.ethz.ch/R-manual/R-devel/library/graphics/html/00Index.html)
+
+
+Visit [The R Graph Gallery](https://r-graph-gallery.com/) to view a collection of charts made with the graphics package.
+
+Read the [ggplot2 cheat sheet](https://github.com/rstudio/cheatsheets/blob/main/data-visualization.pdf):
+
+![ggplot cheat sheet](https://raw.githubusercontent.com/rstudio/cheatsheets/master/pngs/thumbnails/data-visualization-cheatsheet-thumbs.png)
+
+For inspiration visit the [Top 50 ggplot2 Visualizations - The Master List](http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html) (With Full R Code)
+
+Searching expand the posibilities, visit the [ggplot2 extensions](https://exts.ggplot2.tidyverse.org/) page.
+
+
+# Matplotlib
+
+
+Matplotlib is a versatile and robust tool for creating high-quality, customizable graphics. While it is a Python library, it can also be used in other environments like Jupyter Notebook. It is compatible with common data analysis packages such as Pandas and NumPy, and it serves as the foundation for more advanced packages used for visualization and analysis, such as Seaborn, HoloViews, Basemap, GeoPandas, and Canopy.
+
+When using Matplotlib locally, it is recommended to install it through a Python package manager, like the well-known "pip." You can do this by running the command "pip install matplotlib" in your terminal or command prompt, as shown in the image. If you are working in a cloud-based environment, you will also need to install the necessary packages as demonstrated.
+
+## First steps
+
+Matplotlib is a library used for creating visualizations and graphs in Python. After installing the library, you need to import it into your working environment. It's important to understand that Matplotlib works with two main components or "interaction zones":
+
+**Figure:** This is the top-level container that encompasses all elements, essentially acting as the "window" that holds the graph. You can find more details in the matplotlib.figure module.
+
+**Axes:** Axes contain the elements of the figure and allow you to control aspects like plotting, axes, appearance, and more. Detailed information about axes can be found in the matplotlib.axes module.
+
+Matplotlib provides three ways to use the library:
+
+Using the pylab module: By importing the library with the command from pylab import *, you get a style similar to MATLAB. This approach is suitable for quick testing and command-line interactions, although it's less recommended in general usage.
+
+Using the pyplot module: This is a state-based interface for Matplotlib, also similar to MATLAB. It automates the creation of the necessary instances for drawing the graph and is recommended for both interactive and static plotting. You can find more information and a list of functions in the matplotlib.pyplot module.
+
+Using an object-oriented interface: This is the most complex method but offers more control. It allows the generation of advanced graphics because you have greater control over the code to create instances and apply methods to them. This approach is widely recommended for non-interactive graphic generation and can be easily integrated into functions and scripts within larger projects.
+
+![](componentesgrafico.png)
+
+
+
+# Seaborn
+
+Seaborn is a Python library for data visualization that is built on top of Matplotlib. It's specifically designed for creating statistical graphics and has the advantage of tight integration with the Pandas library.
+
+Before you start creating any graphs with Seaborn, it's important to have a good understanding of your data's structure and to ensure that your dataset is preprocessed and ready for analysis. Seaborn offers various functions and features, including:
+
+ - It is oriented towards working with Pandas dataframes, which allows you to examine relationships between multiple variables within your dataset.
+
+ - Seaborn provides strong support for handling categorical variables and visualizing observations and aggregated statistics.
+
+ - You can use it to visualize univariate and bivariate distributions, making it easier to understand your data's characteristics.
+
+ - It offers automatic estimation features, such as plotting linear regression models, simplifying the visualization of relationships within your data.
+
+ - You can gain insights into the general structure of datasets.
+
+ - Seaborn provides high-level abstractions for creating grid-like arrangements of multiple plots.
+
+ - You can customize the style of your visualizations with various built-in themes.
+
+ - It includes tools for selecting color palettes to make your plots visually appealing and informative.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Preparando herramientas
+
+Instalamos y cargamos las librerías necesarias para ejecutar el análisis.
+
+```{python}
+# import numpy as np
+# import pandas as pd
+# import matplotlib.pyplot as plt
+# import seaborn as sns
+
+
+```
+
+## Alistar la información 
+
+Antes de comenzar a graficar es necesario preparar la información. Como siempre es necesario tener un claro entendimiento de los datos que se van a trabajar. 
+
+1. Alistar los datos: Se van a cargar los datos de: examen2, Iris y Breast cancer.
+
+# Generando gráficos con MATPLOTLIB
+
+## Gráficos mediante interfaz orientada a objetos: 
+
+Bajo este enfoque, es necesario crear cada una de las componentes del gráfico: primero la figura, luego definir el tipo de gráfico y los datos se van a visualizar junto a las demás especificaciones pertinentes como colores, etiquetas, rótulos, etc.
+
+Agregamos un "\;" al final del código para evitar obtener información adicional del código que no es de utilidad. Usamos el comando "\%matplotlib notebook" para hacer interactivo el gráfico y "%matplotlib inline" para hacerlo estático.
+
+#### Ejemplo 2  
+
+En procesos de análisis más complejos, esta forma de generar los gráficos puede simplificarse mediante el uso de funciones que contienen criterios preestablecidos para la generación de gráficos y que sólo dependan de la especificación de los datos. Por ejemplo: 
+
+
+### Generando gráficos mediante módulo pyplot: 
+
+Con esta herramienta, se simplifica la programación dado que las intancias del gráfico se generan automáticamente, aún así, es posible modificar y personalizar algunos elementos visuales del gráfico, como colores, estilos de línea y textos mediante la especificación de argumentos dentro de la función que genera el gráfico o apoyados en algunas funciones contenidas en el módulo.
+
+
+
+
+Es posible adicionar más series de datos a un mismo gráfico: 
+
+#### Ejemplo 2
+
+
+
+Cuando sólo declaramos una serie de datos, por defecto los valores son graficados en el eje y, mientras que en el eje x toman los valores de los índices correspondientes como en los ejemplos anteriores. Dentro de las opciones y estilos gráficos, Matplotlib permite especificar los colores desde distintos recursos, a continuación se relacionan algunos de ellos:
+
+| OPCIONES DE COLOR             |  CARACTERÍSTICAS                                                                                                                                                             |
+|-------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| Ciclo de color predeterminado | Listado de colores categorizados desde "C0" a "C9", diseñados para generar un buen contraste entre categorías.                                                               |
+| Codificación hexadecimal      | Pueden listarse mediante el comando: "plt.rcParams['axes.prop_cycle']"                                                                                                       |
+| Colores básicos               | Puede accederse simplemente usando su abreviatura de una sola letra, ejemplo: 'b': Blue ; se dispone de los colores: blue, green, red, cyan, magenta, yellow, black y white. |
+| Nombres HTML estaándar.       | Permite crear una paleta de colores usando nombres estándar de la programación en HTML y que son compatibles con la librería.                                                |
+| RGB o RGBA                    | Especifica el color mediante tuplas de números que definen la mezcla de color que se desea y el nivel de transparencia. Ejemplo:"#ff0000" corresponde al rojo.               |
+| Escala de grises              | Especificando un valor entre 0 y 1, entre más pequeño es más oscuro el tono de gris.                                                                                         |
+| Mapas de color                | Asignan valores numericos a una escala de color, por defecto utiliza la paleta "viridis" que varía el espectro de color desde el amarillo hasta el azul.                     |
+
+
+
+
+#### Ejemplo 3 
+
+Un gráfico de gran utilidad cuando tratamos con datos categóricos es el gráfico de barras; basados en los datos de ejemplo, generamos un gráfico para el número de flores por especie. Para ampliar sobre los parametros disponibles en la función y consultar más ejemplos puede consultarse :[matplotlib.axes.Axes.bar](https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.bar.html#matplotlib.axes.Axes.bar).
+
+
+
+Otro gráfico descriptivo básico es el gráfico de dispersión, para los colores pueden especificarse paletas de color y seleccionarse formas para los puntos especificando un valor al parámetro "marker", para más detalle consultar: [matplotlib.axes.Axes.scatter](https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.scatter.html#matplotlib.axes.Axes.scatter).
+
+
+#### Ejemplo 6
+
+Se genera un histograma para las variables continuas de la base de datos. Más información en:  [matplotlib.axes.Axes.hist](https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.hist.html#matplotlib.axes.Axes.hist).
+
+
+
+#### Ejemplo 7
+
+Generemos ahora un gráfico boxplot, este tipo de gráficos presenta los cuartiles 25, 50 y 75, outliers y si se desea la media de los datos, permite tener una idea general de la variabilidad y sesgo de la variable; más detalles en [matplotlib.axes.Axes.boxplot](https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.boxplot.html#matplotlib.axes.Axes.boxplot).
+
+
+
+
+Agreguemos algunos detalles, probar la celda:
+
+plt.boxplot(x, vert=False, notch=True ,showmeans=True );
+
+
+
+
+#### Ejemplo 8
+
+Pueden graficarse varias variables, facilitando algunas comparaciones.
+
+
+Modificando algunos elementos visuales:
+
+
+
+ # Generando gráficos con SEABORN
+ 
+ ## Gráficas de dispersión
+
+Las gráficas de dispersión se recomiendan para evidenciar relaciones entre variables y para mostrar la distribución de variables que generalmente son numéricas. En general, este es un buen primer paso para observar relaciones y distribución de los datos. 
+
+Seaborn dispone de la función __relplot__, la cual presenta variadas e interesantes parametrizaciones.
+
+
+### Ejemplo 1
+
+
+### Visualizar la clase
+
+Para tareas de clasificación resulta útil relacionar las variables con la clase. Para esto se agrega __hue__=_'variety' a la gráfica de dispersión, ahora se visualiza y se compara con el grafico anterior:
+
+Probar en esta celda
+
+sns.relplot(x="petal.length", y="sepal.length", hue='variety', data=dfi)
+
+Ejercicio
+Probemos ahora otras relaciones, como por ejemplo:
+
+- 'sepal.length' vs 'sepal.width'
+- 'petal.length' vs 'petal.width'
+- 'sepal.width' vs 'petal.width'
+
+
+
+Para observar todas las relaciones entre las variables continuas se puede usar una función que de Seborn que ejecuta automáticamente el análisis completo:
+
+# Función pairplot
+
+sns.pairplot(data=dfi, hue='variety')
+
+
+También es posible limitar el uso de las variables que se quieren analizar, esto es útil cuando son muchas variables.
+
+
+# Función pairplot
+sns.pairplot(data=dfi, hue='variety',vars=['sepal.length', 'petal.length'])
+
+
+
+
+### Ejercicio 2
+
+1. Ahora utilice el dataframe de Breast Cancer (dfc) para analizar la relación entre 5 variables, en las que usted piense que hay relación. (recomendación no intente ejecutar con todas las variables por que se va a tardar mucho el procesamiento)
+
+2. Analice que variables del dtaframe examen2 se pueden visualizar de esta forma?
+
+
+
+
+### Otras opciones de visualización de gráficas dispersas
+
+Varias dimensiones se pueden visualizar en una gráfica de dispersión
+- $x$ variable numérica (puede tener múltiples valores)
+- $y$ variable numérica
+- $hue$ variable categórica (agrupa)
+- $size$ diferentes tamaños de la burbuja, variable numérica 
+- $style$ pone marcas diferentes, variable categórica (agrupa)
+- $col$ organiza filtros por columna, variable categórica (filtra)
+- $row$ organiza filtros por fila, variable categórica (filtra)
+
+
+
+#### Ejemplo
+
+
+
+
+# Probar y analizar
+
+
+
+## Gráficos de líneas
+
+Generalmente cuando se tienen una o muchas variable numéricas que dependen de una variable independiente y ordenada (como por ejemplo el tiempo), lo ideal es realizar gráficos de líneas. En estos gráficos se pueden representar y comparar fácilmente varias series de datos, así como también mostrar comportamientos asociados a la variable independiente.
+
+Cuando se tienen múltiples valores de la serie por cada valor de la varaiable independiente, se  gráfica de manera automática el intervalo de confianza del 95% calculado usando el método de bootstrapping. 
+
+
+
+#### opciones de gráfico
+
+Al igual que los gráficos de dispersión la función permite usar múltiples parámetros para mejorar la visualización e incluir más dimensiones en el análisis. 
+
+#### Ejemplo
+
+Agregue los siguiente a la gráfica:
+- style="jornada"
+- row="programa"
+- markers=True
+
+Observe lo que pasa y haga un análisis del resultado.
+
+
+
+
+
+
+### Ejercicio
+
+Analize y describa las siguientes gráficas. 
+
+
+
+
+#### Descripción de la gráfica 2
+
+
+1. Cómo llamaría esta gráfica
+2. Describa lo que hacen cada uno  de los parámetros usados
+3. Realice un análisis de lo que aporta esta gráfica
+
+
+
+
+
+
+

@@ -1,0 +1,280 @@
+---
+title: "Barplot"
+format: html
+---
+
+# First explanation
+
+A barplot, also known as a bar chart or bar graph, is a common type of data visualization used to represent categorical data. It displays data in rectangular bars or columns, where the length or height of each bar is proportional to the value it represents. Barplots are particularly useful for comparing and visualizing the distribution, frequency, or comparison of different categories or groups.
+
+## About the barplot
+
+Key characteristics of a barplot include:
+
+**Vertical or Horizontal Bars:** Barplots can have vertical bars (columns) or horizontal bars (rows) depending on the orientation of the plot.
+
+**Categories on One Axis:** One axis (usually the x-axis for vertical barplots or the y-axis for horizontal barplots) represents the categories or groups being compared. These categories can be nominal or ordinal data, such as product names, time periods, or survey responses.
+
+**Values on the Other Axis:** The other axis (usually the y-axis for vertical barplots or the x-axis for horizontal barplots) represents the values or quantities associated with each category. These values can be counts, frequencies, percentages, or any numerical data.
+
+**Bar Length or Height:** The length or height of each bar corresponds to the value it represents. Longer bars indicate larger values, while shorter bars indicate smaller values.
+
+**Spacing Between Bars:** Typically, there is a small gap or spacing between adjacent bars to visually separate them.
+
+**Color or Patterns:** Different categories or groups are often represented using different colors or patterns to distinguish them within the plot.
+
+***Labels and Titles:** Barplots include labels for the categories and axes, as well as a title to provide context and clarity.
+
+Barplots are commonly used in data analysis and data visualization for various purposes, including:
+
+**Comparing Categories:** Barplots are effective for comparing the distribution of categories or groups. For example, you can use a barplot to compare sales figures for different products.
+
+**Displaying Frequencies:** Barplots are often used to display the frequency or count of occurrences of categorical variables. This is common in histograms, which are a specific type of barplot for continuous data grouped into bins.
+
+**Showing Relative Proportions:** Stacked barplots or grouped barplots can be used to show the relative proportions or composition of a whole across different categories. For example, you can use a stacked barplot to show how the budget for a project is allocated among different expense categories.
+
+**Comparing Data Across Multiple Factors:** Grouped barplots can be used to compare data across multiple factors or dimensions. Each group of bars represents a combination of factors, allowing for more complex comparisons.
+
+Overall, barplots are versatile and widely used in data science, data analysis, and data communication for their ability to provide a clear and intuitive representation of categorical data.
+
+
+## Visual alphabet
+
+**Multiplicity:** Barplots can represent multiplicity by showing multiple bars or sets of bars on the same plot. Each bar typically corresponds to a different category, group, or data series.
+
+**Position:** The position of each bar along the x-axis represents a category or data point. The y-axis position indicates the value or magnitude of each category or data point.
+
+**Length:** The length or height of each bar is directly proportional to the data value it represents. Longer or taller bars indicate higher values.
+
+**Angle:** In traditional barplots, angles are not typically used as a primary visual element. However, in more advanced or specialized barplot variations, angles may be employed for creative visual effects.
+
+**Area:** Barplots primarily use length (bar height) to represent data values. While the area of a bar can be calculated, it's typically not a central feature in traditional barplots.
+
+**Color:** Color can be used to distinguish between bars representing different categories, groups, or data series. It can also be used to emphasize certain bars or add additional categorical information.
+
+**Opacity:** Opacity is occasionally used to provide a sense of transparency or to distinguish overlapping bars when multiple barplots are combined.
+
+**3D:** Traditional barplots are generally two-dimensional. However, 3D barplots can add a third dimension by representing bars in a 3D space, using height, width, and depth.
+
+**Shape:** Barplots traditionally use rectangular bars. The shape is typically uniform, with variations mainly in length and color. However, some creative barplot variations may utilize different shapes for bars.
+
+**Texture:** Texture is not commonly used in traditional barplots. However, it may be applied for additional visual effects or information in more complex data visualizations.
+
+**Orientation:** The orientation of bars in a barplot can vary. Vertical barplots have bars extending upward from the x-axis, while horizontal barplots have bars extending horizontally from the y-axis. The choice of orientation depends on the data and the desired visual representation.
+
+# Programming
+
+First we can configure the environment for mixed programming. Using another engine will need another setup.
+
+
+```{r}
+library("reticulate")
+# reticulate::install_miniconda()
+use_python(file.path(miniconda_path(), "bin", "python3.11"))
+# py_install("pandas")
+# py_install("matplotlib")
+# py_install("seaborn")
+
+```
+
+
+```{r}
+library("knitr")
+opts_chunk$set(
+  fig.width = 6,
+  fig.height = 4,
+  message = FALSE,
+  warning = FALSE,
+  echo = TRUE,
+  results = "asis"
+)
+
+```
+
+
+
+```{r}
+library("ggplot2")
+library("magrittr")
+library("dplyr")
+
+diamonds %<>%
+  sample_n(5000) # disminuir los datos p
+
+
+# diamonds %>% 
+#   glimpse
+
+
+
+
+```
+
+
+```{python}
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import matplotlib.colors
+
+# You can uncomment this line to change the style of the graphs.
+# plt.style.use('ggplot')
+
+diamonds = r.diamonds
+
+
+
+
+```
+
+
+## Using r-base
+
+```{r}
+table(diamonds["cut"]) -> tb
+
+barplot(tb)
+
+```
+
+Step-by-Step Breakdown:
+
+
+**`table(diamonds["cut"]) -> tb`:** In this line, a table of counts is created using the table() function. It counts the occurrences of each unique value in the "cut" column of the "diamonds" dataset and assigns the result to a variable named "tb." Essentially, it creates a frequency table that shows how many times each category in the "cut" column appears in the dataset.
+
+**`barplot(tb)`:** This line generates a barplot based on the frequency table "tb" created in the previous step. The barplot() function takes the frequency table as input and creates a bar chart where:
+
+ - The x-axis represents the unique categories in the "cut" column.
+ - The y-axis represents the count or frequency of each category.
+ - Each bar's length corresponds to the count of occurrences for the respective category.
+
+The resulting barplot provides a visual representation of how the different "cut" categories are distributed within the "diamonds" dataset. You can observe the relative frequencies or counts of each category and compare them visually using the bars.
+
+In summary, the code takes the "cut" column of the "diamonds" dataset, creates a frequency table, and then generates a barplot to display the distribution of the "cut" categories using bars of varying heights to represent the counts or frequencies of each category. Barplots are commonly used to visualize the distribution of categorical data and make comparisons between categories.
+
+## Using ggplot
+
+
+```{r}
+ggplot(diamonds) +
+  aes(x = cut) +
+  geom_bar()
+
+```
+
+Step-by-Step Breakdown:
+
+**`ggplot(diamonds)`:** This line initializes a new ggplot2 plot object by specifying the dataset "diamonds" as the data source for the plot. It sets up the foundation for creating various types of visualizations.
+
+**`aes(x = cut)`:** Within the ggplot() function, the aes() function is used to define the aesthetics (visual properties) of the plot. In this case, it specifies that the "x" aesthetic (horizontal position) of the plot should be mapped to the "cut" column of the dataset. This means that the categories in the "cut" column will be used as the x-axis values for the barplot.
+
+**`geom_bar()`:** This function, called within the ggplot() pipeline, adds the "geom" (geometric object) layer to the plot. In this case, geom_bar() is used to create a barplot. It interprets the aesthetics defined earlier (mapping "cut" to the x-axis) and constructs a bar chart based on the counts or frequencies of each unique category in the "cut" column.
+
+ - Each unique category in the "cut" column becomes a separate bar on the x-axis.
+ - The height of each bar represents the count or frequency of that category in the dataset.
+
+In summary, the code uses the ggplot2 package to create a barplot that displays the distribution of categories in the "cut" column of the "diamonds" dataset. Each category is represented as a bar, and the height of each bar corresponds to the count of occurrences of that category in the dataset. This visualization allows you to easily compare the frequencies of different "cut" categories in the dataset.
+
+
+## Using pandas
+
+```{python}
+tb = diamonds.groupby("cut").size()
+
+
+plt.figure()
+tb.plot(kind = "bar")
+plt.show()
+plt.close()
+
+
+```
+
+
+pandas plotting summary
+
+**`tb = diamonds.groupby("cut").size()`:** In this line of code, the groupby() method is used to group the rows of the "diamonds" DataFrame by the unique values in the "cut" column. The size() function is then applied to each group to count the number of occurrences of each unique value (category) in the "cut" column. The result is a Pandas Series (tb) where the index contains the unique categories ("cut" values) and the values represent the counts of each category.
+
+**`plt.figure()`:** This line initializes a new Matplotlib figure. It sets up the canvas or space where the barplot will be drawn.
+
+**`tb.plot(kind="bar")`:** The plot() function is used to create the barplot based on the data in the Pandas Series "tb." The kind="bar" argument specifies that a barplot should be generated. This function generates a vertical bar chart where:
+
+ - The x-axis represents the unique categories ("cut" values).
+ - The y-axis represents the count or size of each category, as determined by the "tb" Series.
+
+**`plt.show()`:** Finally, this line displays the barplot that was created using Matplotlib.
+
+In summary, the code groups the "diamonds" DataFrame by the "cut" column, counts the occurrences of each unique category, and then creates and displays a barplot. The resulting barplot visually represents the distribution of different "cut" categories in the dataset, allowing you to compare the frequency or count of each category using the bars.
+
+## Using seaborn
+
+```{python}
+sns.countplot(x = "cut", data = diamonds, color = "navy")
+plt.show()
+plt.close()
+
+```
+
+
+Explanation of seaborn use
+
+**`sns.countplot(x="cut", data=diamonds, color="navy")`:** In this line, the Seaborn countplot() function is used to create the countplot. Here's what each part of this function does:
+
+ - **`x="cut"`:** This specifies the variable to be plotted on the x-axis. In this case, it's the "cut" column from the DataFrame "diamonds," which contains the categories of diamond cuts.
+
+ - **`data=diamonds`:** This specifies the DataFrame from which the data should be drawn, in this case, the "diamonds" DataFrame.
+
+ **`color="navy"`:** This sets the color of the bars in the countplot to navy blue.
+
+The countplot() function automatically calculates the count of each unique category in the "cut" column and creates vertical bars to represent these counts.
+
+**`plt.show()`:** This line displays the countplot using Matplotlib. Once you've created the plot with Seaborn, you can use Matplotlib functions like plt.show() to display it.
+
+In summary, the code creates a countplot using Seaborn to visualize the distribution of diamond cuts in the "cut" column of the "diamonds" DataFrame. Each bar in the countplot represents a unique diamond cut category, and the height of the bar corresponds to the count or frequency of that category in the dataset. The bars are colored navy blue for better visualization. This type of plot is helpful for understanding the distribution of categorical data and comparing the frequencies of different categories.
+
+
+## Using matplotlib
+
+```{python}
+tb = diamonds.groupby("cut").size()
+
+plt.bar(tb.index.to_list(), tb.values)
+plt.show()
+plt.close()
+
+```
+
+
+How it works
+
+**`plt.bar(tb.index.to_list(), tb.values)`:** In this line, the plt.bar() function is used to create the barplot. Here's what each part of this function does:
+
+ - **`tb.index.to_list()`:** This part retrieves the index (labels or categories) of the tb Pandas Series and converts it to a Python list. These index values are assumed to represent the categories or groups for which you want to create the bars on the x-axis.
+
+ - **`tb.values`:** This part retrieves the values associated with each category in the tb Series. These values represent the counts or frequencies of each category.
+
+Together, tb.index.to_list() provides the x-axis (categories), and tb.values provides the y-axis (counts or frequencies), which are used to create the bars in the barplot.
+
+**`plt.show()`:** This line displays the barplot using Matplotlib. Once you've created the plot with plt.bar(), you use plt.show() to render and display the plot.
+
+In summary, the code generates a basic barplot using Matplotlib, displaying the distribution of counts or frequencies of different categories. The x-axis represents the categories (retrieved from the index of the tb Series), and the y-axis represents the counts (retrieved from the values of the tb Series). This type of barplot is useful for visualizing and comparing d
+
+## Comments
+
+Reordering bars in a bar chart is a common requirement when you want to display the bars in a specific order, such as ordering them by frequency or a custom criterion. I'll provide solutions for both R and Python (using Matplotlib and Seaborn) to reorder bars in a bar chart:
+
+ - Reordering Bars in R (ggplot2): In R's ggplot2, you can use the reorder() function within the aes() function to reorder bars based on a specific variable.
+
+ - Reordering Bars in Python (Matplotlib): In Python's Matplotlib, you can use the numpy.argsort() function to reorder the bars based on a specific variable.
+
+ - Reordering Bars in Python (Seaborn): If you prefer using Seaborn, you can achieve bar reordering by using the order parameter in sns.barplot()
+
+Creating horizontal bar charts in both R and Python is straightforward. Both languages provide solutions for creating horizontal bar charts in R using ggplot2 and in Python using Matplotlib and Seaborn.
+
+ - Horizontal Bar Chart in R (ggplot2): In R's ggplot2, you can create a horizontal bar chart using the geom_bar() function while specifying the aesthetics (aes()) for the y-axis. Making y = category and x = count aesthetics are used to create a horizontal bar chart where the "category" variable is on the y-axis, and the "count" variable is on the x-axis.
+
+ - Horizontal Bar Chart in Python (Matplotlib): In Python's Matplotlib, you can create a horizontal bar chart using the plt.barh() function to specify horizontal bars. So, plt.barh(categories, counts) is used to create a horizontal bar chart where the "categories" list is on the y-axis, and the "counts" list is on the x-axis.
+
+ - Horizontal Bar Chart in Python (Seaborn): In Python's Seaborn, you can create a horizontal bar chart using the sns.barplot() function and specifying the orient parameter as "h" for horizontal. By making orient="h" is used in sns.barplot() to specify that the chart should be horizontal.
+

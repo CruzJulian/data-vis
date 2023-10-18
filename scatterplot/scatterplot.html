@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Scatterplot</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="scatterplot_files/libs/clipboard/clipboard.min.js"></script>
+<script src="scatterplot_files/libs/quarto-html/quarto.js"></script>
+<script src="scatterplot_files/libs/quarto-html/popper.min.js"></script>
+<script src="scatterplot_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="scatterplot_files/libs/quarto-html/anchor.min.js"></script>
+<link href="scatterplot_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="scatterplot_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="scatterplot_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="scatterplot_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="scatterplot_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Scatterplot</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="first-explanation" class="level1">
+<h1>First explanation</h1>
+<p>A <strong>scatterplot</strong> is a graphical representation of data points on a two-dimensional Cartesian plane, typically used to visualize the relationship between two variables. It’s a fundamental tool in statistics and data analysis, providing insights into the patterns and associations between data points.</p>
+<section id="about-the-scatterplot" class="level2">
+<h2 class="anchored" data-anchor-id="about-the-scatterplot">About the scatterplot</h2>
+<ol type="1">
+<li><p><strong>Axis</strong>: A scatterplot consists of two axes: the horizontal (x-axis) and the vertical (y-axis). Each axis represents a different variable or attribute of the data.</p></li>
+<li><p><strong>Data Points</strong>: Each data point is represented as a single dot on the scatterplot. These dots are placed on the graph based on the values of the two variables being compared.</p></li>
+<li><p><strong>Variable Mapping</strong>: The variable you’re investigating or measuring goes on the x-axis, while the variable you’re trying to understand or predict goes on the y-axis. For example, if you’re studying the relationship between hours spent studying (x-axis) and exam scores (y-axis), you would place each student’s data point on the graph according to their study hours and exam score.</p></li>
+<li><p><strong>Pattern Interpretation</strong>:</p>
+<ul>
+<li><strong>Positive Relationship</strong>: If the data points generally form an upward-sloping pattern from left to right, it indicates a positive relationship. This means that as the x-variable increases, the y-variable tends to increase as well.</li>
+<li><strong>Negative Relationship</strong>: If the data points form a downward-sloping pattern from left to right, it suggests a negative relationship. In this case, as the x-variable increases, the y-variable tends to decrease.</li>
+<li><strong>No Relationship</strong>: If the data points are scattered randomly without a discernible pattern, it suggests no significant relationship between the two variables.</li>
+</ul></li>
+<li><p><strong>Outliers</strong>: Outliers are data points that fall far away from the main cluster of data points on the scatterplot. They can be important to identify because they may indicate unusual or extreme values that can skew your analysis.</p></li>
+<li><p><strong>Data Clusters</strong>: Sometimes, data points form clusters or groups on the scatterplot. These clusters can provide insights into subpopulations within your data.</p></li>
+<li><p><strong>Axis Labels and Title</strong>: A good scatterplot should have clear labels for both axes, indicating what each axis represents, and a title that describes the purpose of the plot or the relationship being explored.</p></li>
+</ol>
+<p>Scatterplots are valuable for various purposes, such as identifying trends, detecting outliers, assessing the strength and direction of relationships between variables, and making predictions based on observed patterns. They are often used in fields like statistics, economics, social sciences, and many others to visually explore and analyze data.</p>
+</section>
+<section id="visual-alphabet" class="level2">
+<h2 class="anchored" data-anchor-id="visual-alphabet">Visual alphabet</h2>
+<p>Scatterplot is a common data visualization used to display the relationship between two numerical variables. Its visual representation relies on various fundamental visual elements, collectively forming the “visual alphabet” of a scatterplot. These elements include:</p>
+<ol type="1">
+<li><p><strong>Points (Markers):</strong> Points are the primary visual elements, each representing a data point or observation. They can take various shapes, such as circles, dots, triangles, or other symbols.</p></li>
+<li><p><strong>X-Axis:</strong> The x-axis represents one of the two numerical variables under analysis and displays a range of values with tick marks and labels.</p></li>
+<li><p><strong>Y-Axis:</strong> Similar to the x-axis, the y-axis represents the other numerical variable and displays its range of values with tick marks and labels.</p></li>
+<li><p><strong>Axis Labels:</strong> Scatterplots include labels for the x-axis and y-axis, providing context for interpreting the plot.</p></li>
+<li><p><strong>Title:</strong> A title is often added to describe the plot’s purpose or content.</p></li>
+<li><p><strong>Legend:</strong> If the plot involves different data groups or categories (e.g., indicated by color or shape), a legend explains the meaning of each group.</p></li>
+<li><p><strong>Gridlines:</strong> Optional gridlines aid in reading specific values from the axes and serve as a visual reference.</p></li>
+<li><p><strong>Colors:</strong> Color differentiation can be used to distinguish between data groups or categories, with each group assigned a unique color.</p></li>
+<li><p><strong>Transparency (Alpha):</strong> In some cases, transparency (alpha values) can be applied to points to highlight data density or overlapping points.</p></li>
+<li><p><strong>Trend Lines (Regression Lines):</strong> While not always present, trend lines, such as regression lines, may be added to illustrate data trends.</p></li>
+<li><p><strong>Annotations:</strong> Text labels or annotations can be applied to specific data points to provide additional context or highlight important observations.</p></li>
+<li><p><strong>Background and Borders:</strong> Adjustments to the background color and borders of the plot area can enhance visual clarity and aesthetics.</p></li>
+</ol>
+<p>These visual elements collectively form the essential components of a scatterplot, allowing viewers to understand the relationships, patterns, and trends between the two numerical variables being analyzed. Designers and data analysts can manipulate these elements to create effective and informative scatterplots for data exploration and communication.</p>
+</section>
+</section>
+<section id="programming" class="level1">
+<h1>Programming</h1>
+<p>First we can configure the environment for mixed programming. Using another engine will need another setup.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"reticulate"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># reticulate::install_miniconda()</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">use_python</span>(<span class="fu">file.path</span>(<span class="fu">miniconda_path</span>(), <span class="st">"bin"</span>, <span class="st">"python3.11"</span>))</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># py_install("pandas")</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># py_install("matplotlib")</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># py_install("seaborn")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"knitr"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>opts_chunk<span class="sc">$</span><span class="fu">set</span>(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">fig.width =</span> <span class="dv">6</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">fig.height =</span> <span class="dv">4</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">message =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">warning =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">echo =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">results =</span> <span class="st">"asis"</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggplot2"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"magrittr"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"dplyr"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">%&lt;&gt;%</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="dv">5000</span>) <span class="co"># disminuir los datos p</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># diamonds %&gt;% </span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   glimpse</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.colors</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># You can uncomment this line to change the style of the graphs.</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.style.use('ggplot')</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>diamonds <span class="op">=</span> r.diamonds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="using-r-base" class="level2">
+<h2 class="anchored" data-anchor-id="using-r-base">Using r-base</h2>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(price <span class="sc">~</span> carat, <span class="at">data =</span> diamonds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="scatterplot_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="576"></p>
+<p>Step-by-Step Breakdown:</p>
+<p><strong><code>plot</code>:</strong> This is a fundamental R function used to create various types of plots, including scatterplots. In this case, it’s used to create a scatterplot.</p>
+<p><strong><code>price ~ carat</code>:</strong> This notation specifies the variables to be plotted. The tilde (~) separates the dependent variable (“price”) from the independent variable (“carat”). Essentially, it’s saying that you want to plot “price” on the y-axis and “carat” on the x-axis.</p>
+<p><strong><code>data = diamonds</code>:</strong> This parameter specifies the dataset from which the variables “price” and “carat” are taken. In this case, it uses the “diamonds” dataset, which presumably contains information about diamonds, including their prices and carat weights.</p>
+<p>When you execute this code, it will generate a scatterplot with “carat” on the x-axis and “price” on the y-axis. Each point on the plot represents a diamond, where the x-coordinate is the diamond’s carat weight, and the y-coordinate is its price. This type of visualization allows you to explore the relationship between diamond weight (carat) and price, helping you identify patterns, trends, or outliers in the data. Scatterplots are commonly used for data exploration and visualization in statistics and data analysis.</p>
+</section>
+<section id="using-ggplot" class="level2">
+<h2 class="anchored" data-anchor-id="using-ggplot">Using ggplot</h2>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds) <span class="sc">+</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price) <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="scatterplot_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="576"></p>
+<p>Explanation of ggplot implemntation, step-by-Step Breakdown:</p>
+<p><strong>Initializing ggplot:</strong> The code begins by initializing a ggplot object, with the diamonds dataset as its data source. The diamonds dataset is a built-in dataset in ggplot2, containing various attributes of diamonds, including carat, cut, clarity, and price. This step sets the dataset for plotting.</p>
+<p><strong>Aesthetic Mapping (aes):</strong> The line aes(x = carat, y = price) specifies the aesthetics (visual properties) of the plot. It instructs ggplot to use the carat column from the dataset for the x-axis (x) and the price column for the y-axis (y). Essentially, it maps the carat values to the horizontal axis and the price values to the vertical axis, which is fundamental for creating a scatterplot.</p>
+<p><strong>Adding Points (geom_point):</strong> The final line, geom_point(), adds a geometric layer to the plot. Specifically, it adds points to the plot, creating a scatterplot. Given the aesthetics defined earlier (aes(x = carat, y = price)), ggplot understands that the carat values correspond to the x-coordinates, and the price values correspond to the y-coordinates. As a result, the code generates a scatterplot representing diamonds, where each point represents a diamond’s carat (weight) on the x-axis and its price on the y-axis.</p>
+<p><strong>In Summary:</strong> This R code utilizes the ggplot2 library to produce a scatterplot, offering a visual depiction of the relationship between diamond carat and price. Scatterplots like this one are valuable for exploring and understanding data patterns and trends within the diamonds dataset or similar datasets.</p>
+</section>
+<section id="using-pandas" class="level2">
+<h2 class="anchored" data-anchor-id="using-pandas">Using pandas</h2>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>diamonds.plot.scatter(<span class="st">"carat"</span>, <span class="st">"price"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="scatterplot_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="576"><img src="scatterplot_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid" width="576"></p>
+<p>Explanation of pandas plotting</p>
+<p><strong><code>plt.figure()</code>:</strong> This line creates a new empty figure for the plot. In Matplotlib, a figure is like a canvas or container for one or more plots or charts. This line initializes a new figure to prepare for the scatterplot.</p>
+<p><strong><code>diamonds.plot.scatter("carat", "price")</code>:</strong> This line creates a scatterplot using the “diamonds” dataset. Here’s what’s happening within this line:</p>
+<ul>
+<li><strong><code>diamonds</code>:</strong> It seems that “diamonds” is assumed to be a Pandas DataFrame, which is a common data structure in Python for tabular data.</li>
+<li><strong><code>.plot</code>:</strong> This is a Pandas method that allows you to create various types of plots from a DataFrame.</li>
+<li><strong><code>.scatter("carat", "price")</code>:</strong> This part specifies that you want to create a scatterplot with “carat” values on the x-axis and “price” values on the y-axis. It essentially tells Pandas to use the “carat” column for the x-coordinates and the “price” column for the y-coordinates when creating the scatterplot.</li>
+</ul>
+<p><strong><code>plt.show():</code></strong> This line displays the plot on your screen. Without this line, the plot would be created but not shown. This line ensures that the scatterplot is visible to you.</p>
+<p>In summary, this Python code uses Matplotlib and Pandas to create and display a scatterplot from a dataset called “diamonds.” The scatterplot shows the relationship between the “carat” (diamond weight) and “price” (diamond price) columns from the dataset. Each point on the scatterplot represents a diamond, with its carat value on the x-axis and its price on the y-axis. This type of visualization is commonly used to explore and understand the relationship between two variables.</p>
+</section>
+<section id="using-seaborn" class="level2">
+<h2 class="anchored" data-anchor-id="using-seaborn">Using seaborn</h2>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(x<span class="op">=</span><span class="st">'carat'</span>, y<span class="op">=</span><span class="st">'price'</span>, data<span class="op">=</span>diamonds)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="scatterplot_files/figure-html/unnamed-chunk-8-5.png" class="img-fluid" width="576"></p>
+<p>Explanation of seaborn use</p>
+<p><strong><code>sns.scatterplot</code>:</strong> This line creates a scatterplot using Seaborn’s scatterplot function. It specifies that the “carat” values should be on the x-axis (x=‘carat’) and the “price” values on the y-axis (y=‘price’). Seaborn makes it easy to create visually appealing and informative scatterplots.</p>
+<p><strong><code>x='carat' and y='price'</code>:</strong> These parameters specify the variables to be plotted on the x-axis and y-axis, respectively. In this case, “carat” is chosen for the x-axis (horizontal) and “price” for the y-axis (vertical).</p>
+<p><strong><code>data=diamonds</code>:</strong> This parameter specifies the dataset to be used for the plot. It assumes that “diamonds” is a Pandas DataFrame or a similar data structure containing the data for the plot.</p>
+<p><strong><code>plt.show()</code>:</strong> This line is used to display the plot on the screen. Without this line, the plot would be created but not shown. It ensures that the scatterplot is visible for examination.</p>
+<p>In summary, this Python code uses Seaborn to create a scatterplot from the “diamonds” dataset. It displays the relationship between the “carat” (diamond weight) values on the x-axis and the “price” values (diamond price) on the y-axis. The fit_reg=False parameter indicates that no regression line will be added to the scatterplot. This type of visualization is often used to explore the relationship between two variables and assess patterns and trends in the data.</p>
+</section>
+<section id="using-matplotlib" class="level2">
+<h2 class="anchored" data-anchor-id="using-matplotlib">Using matplotlib</h2>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>plt.scatter(diamonds[<span class="st">'carat'</span>], diamonds[<span class="st">'price'</span>])</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'carat'</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'price'</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Scatterplot of Carat vs. Price'</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="scatterplot_files/figure-html/unnamed-chunk-9-7.png" class="img-fluid" width="576"></p>
+<p>How it works</p>
+<p><strong><code>plt.scatter()</code>:</strong> This line calls the scatter function from the Matplotlib library to create a scatterplot. It takes two arguments:</p>
+<ul>
+<li><strong><code>diamonds['carat']</code>:</strong> This specifies the values to be plotted on the x-axis (horizontal axis). It assumes that diamonds is a DataFrame or similar data structure, and it selects the “carat” column as the x-values.</li>
+<li><strong><code>diamonds['price']</code>:</strong> This specifies the values to be plotted on the y-axis (vertical axis). It selects the “price” column as the y-values.</li>
+</ul>
+<p><strong><code>plt.xlabel('carat')</code>:</strong> This line sets the label for the x-axis to “carat,” indicating that the x-axis represents the “carat” values (diamond weight).</p>
+<p><strong><code>plt.ylabel('price')</code>:</strong> This line sets the label for the y-axis to “price,” indicating that the y-axis represents the “price” values (diamond price).</p>
+<p><strong><code>plt.title('Scatterplot of Carat vs. Price')</code>:</strong> This line sets the title of the plot to “Scatterplot of Carat vs.&nbsp;Price,” providing a brief description of the plot’s content.</p>
+<p><strong><code>plt.show()</code>:</strong> Finally, this line displays the scatterplot on your screen. Without this line, the plot would be created but not shown. This command ensures that the scatterplot is visible for examination.</p>
+<p>In summary, the code creates a scatterplot using Matplotlib, showing the relationship between “carat” (diamond weight) on the x-axis and “price” (diamond price) on the y-axis. The labels for the axes and a title are added to provide context to the plot. Scatterplots like this are commonly used in data visualization to explore relationships between two variables.</p>
+</section>
+<section id="adding-colors" class="level2">
+<h2 class="anchored" data-anchor-id="adding-colors">Adding colors</h2>
+<p>The provided code creates scatterplots that visualize the relationship between two variables, “carat” (diamond weight) and “price” (diamond price), while also incorporating the “cut” (diamond cut quality) of the diamonds as a categorical variable represented by colors.</p>
+<p>In r-base</p>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(price <span class="sc">~</span> carat, <span class="at">col =</span> cut, <span class="at">data =</span> diamonds, <span class="at">pch =</span> <span class="dv">20</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="fl">0.25</span>, <span class="dv">17500</span>, <span class="at">legend=</span><span class="fu">unique</span>(diamonds<span class="sc">$</span>cut),</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">col=</span>diamonds<span class="sc">$</span>cut, <span class="at">pch=</span><span class="dv">20</span>, <span class="at">cex=</span><span class="fl">0.8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="scatterplot_files/figure-html/unnamed-chunk-10-9.png" class="img-fluid" width="576"></p>
+<p>In ggplot</p>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds) <span class="sc">+</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price, <span class="at">colour =</span> cut) <span class="sc">+</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="scatterplot_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="576"></p>
+<p>In pandas</p>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>diamonds.plot.scatter(<span class="st">"carat"</span>, <span class="st">"price"</span>, c<span class="op">=</span><span class="st">"cut"</span>, colormap<span class="op">=</span><span class="st">'viridis'</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="scatterplot_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="576"><img src="scatterplot_files/figure-html/unnamed-chunk-12-2.png" class="img-fluid" width="576"></p>
+<p>In seaborn</p>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(x<span class="op">=</span><span class="st">'carat'</span>, y<span class="op">=</span><span class="st">'price'</span>, data<span class="op">=</span>diamonds, hue<span class="op">=</span><span class="st">'cut'</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="scatterplot_files/figure-html/unnamed-chunk-13-5.png" class="img-fluid" width="576"></p>
+<p>In matplotlib</p>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>legend_labels <span class="op">=</span> diamonds[<span class="st">'cut'</span>].cat.categories  <span class="co"># Get unique "cut" </span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>scatter <span class="op">=</span> plt.scatter(diamonds[<span class="st">'carat'</span>], diamonds[<span class="st">'price'</span>], c<span class="op">=</span>diamonds[<span class="st">'cut'</span>].cat.codes)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Carat'</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Price'</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Scatterplot of Carat vs. Price (Colored by Cut)'</span>)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>plt.legend(handles<span class="op">=</span>scatter.legend_elements()[<span class="dv">0</span>], labels<span class="op">=</span><span class="bu">list</span>(legend_labels))</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="scatterplot_files/figure-html/unnamed-chunk-14-7.png" class="img-fluid" width="576"></p>
+</section>
+<section id="and-more-colors" class="level2">
+<h2 class="anchored" data-anchor-id="and-more-colors">And more colors…</h2>
+<p>These plots are using a set of selected colors.</p>
+<p>using r-base</p>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>colors <span class="ot">=</span> <span class="fu">c</span>(<span class="st">'Fair'</span> <span class="ot">=</span> <span class="st">'blue'</span>, <span class="st">'Good'</span> <span class="ot">=</span> <span class="st">'orange'</span>, <span class="st">'Very Good'</span> <span class="ot">=</span> <span class="st">'green'</span>, <span class="st">'Premium'</span> <span class="ot">=</span> <span class="st">'red'</span>, <span class="st">'Ideal'</span> <span class="ot">=</span> <span class="st">'purple'</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(price <span class="sc">~</span> carat, <span class="at">col =</span> colors[cut], <span class="at">data =</span> diamonds, <span class="at">pch =</span> <span class="dv">20</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="fl">0.25</span>, <span class="dv">17500</span>, <span class="at">legend=</span><span class="fu">unique</span>(diamonds<span class="sc">$</span>cut),</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">col=</span>colors, <span class="at">pch=</span><span class="dv">20</span>, <span class="at">cex=</span><span class="fl">0.8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="scatterplot_files/figure-html/unnamed-chunk-15-9.png" class="img-fluid" width="576"></p>
+<p>using ggplot</p>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds) <span class="sc">+</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price, <span class="at">colour =</span> cut) <span class="sc">+</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> colors) <span class="sc">+</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="scatterplot_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="576"></p>
+<p>using pandas</p>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> {<span class="st">'Fair'</span>:<span class="st">'blue'</span>, <span class="st">'Good'</span>:<span class="st">'orange'</span>, <span class="st">'Very Good'</span>:<span class="st">'green'</span>, <span class="st">'Premium'</span>:<span class="st">'red'</span>, <span class="st">'Ideal'</span>:<span class="st">'purple'</span>}</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>colm <span class="op">=</span> matplotlib.colors.ListedColormap(colors.values())</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>gr <span class="op">=</span> diamonds.plot.scatter(<span class="st">"carat"</span>, <span class="st">"price"</span>, c <span class="op">=</span> <span class="st">"cut"</span>, cmap <span class="op">=</span> colm)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="scatterplot_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="576"><img src="scatterplot_files/figure-html/unnamed-chunk-17-2.png" class="img-fluid" width="576"></p>
+<p>using seaborn</p>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the scatterplot with custom colors</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(x<span class="op">=</span><span class="st">'carat'</span>, y<span class="op">=</span><span class="st">'price'</span>, data<span class="op">=</span>diamonds, hue<span class="op">=</span><span class="st">'cut'</span>, palette<span class="op">=</span>colors)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Scatterplot of Carat vs. Price (Colored by Cut)'</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="scatterplot_files/figure-html/unnamed-chunk-18-5.png" class="img-fluid" width="576"></p>
+<p>using matplotlib and a for</p>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">6</span>))</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>grouped <span class="op">=</span> diamonds.groupby(<span class="st">'cut'</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> key, group <span class="kw">in</span> grouped:</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    group.plot(ax<span class="op">=</span>ax, kind<span class="op">=</span><span class="st">'scatter'</span>, x<span class="op">=</span><span class="st">'carat'</span>, y<span class="op">=</span><span class="st">'price'</span>, label<span class="op">=</span>key, color<span class="op">=</span>colors[key])</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="scatterplot_files/figure-html/unnamed-chunk-19-7.png" class="img-fluid" width="576"></p>
+</section>
+<section id="adding-a-trending-line" class="level2">
+<h2 class="anchored" data-anchor-id="adding-a-trending-line">Adding a trending line</h2>
+<p>r-base code</p>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">=</span> <span class="fu">lm</span>(price <span class="sc">~</span> carat, <span class="at">data =</span> diamonds)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(price <span class="sc">~</span> carat, <span class="at">data =</span> diamonds, <span class="at">pch =</span> <span class="dv">20</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a =</span> model<span class="sc">$</span>coefficients[<span class="st">"(Intercept)"</span>], <span class="at">b =</span> model<span class="sc">$</span>coefficients[<span class="st">"carat"</span>], <span class="at">col =</span> <span class="st">"magenta"</span>, <span class="at">lwd =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="scatterplot_files/figure-html/unnamed-chunk-20-9.png" class="img-fluid" width="576"></p>
+<p>ggplot code</p>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds) <span class="sc">+</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price) <span class="sc">+</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="scatterplot_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="576"></p>
+<p>pandas code</p>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the line of best fit</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>a, b <span class="op">=</span> np.polyfit(diamonds[<span class="st">"carat"</span>], diamonds[<span class="st">"price"</span>], <span class="dv">1</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>diamonds[<span class="st">"fit"</span>] <span class="op">=</span> a <span class="op">*</span> diamonds[<span class="st">"carat"</span>] <span class="op">+</span> b</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> diamonds.plot.scatter(<span class="st">"carat"</span>, <span class="st">"price"</span>)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>diamonds.plot.line(<span class="st">"carat"</span>, <span class="st">"fit"</span>, color<span class="op">=</span><span class="st">'red'</span>, ax <span class="op">=</span> ax, legend <span class="op">=</span> <span class="va">None</span>)</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="scatterplot_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="576"><img src="scatterplot_files/figure-html/unnamed-chunk-22-2.png" class="img-fluid" width="576"></p>
+<p>matplotlib code</p>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>plt.scatter(diamonds[<span class="st">"carat"</span>], diamonds[<span class="st">"price"</span>], label<span class="op">=</span><span class="st">'Data Points'</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>plt.plot(diamonds[<span class="st">"carat"</span>], a <span class="op">*</span> diamonds[<span class="st">"carat"</span>] <span class="op">+</span> b, label<span class="op">=</span><span class="st">'Trend Line'</span>, color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'X-axis'</span>)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Y-axis'</span>)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="scatterplot_files/figure-html/unnamed-chunk-23-5.png" class="img-fluid" width="576"></p>
+<p>seaborn code</p>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>sns_plot <span class="op">=</span> sns.lmplot(x<span class="op">=</span><span class="st">'carat'</span>, y<span class="op">=</span><span class="st">'price'</span>, data<span class="op">=</span>diamonds,  line_kws<span class="op">=</span>{<span class="st">'color'</span>: <span class="st">'red'</span>})</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="scatterplot_files/figure-html/unnamed-chunk-24-7.png" class="img-fluid" width="480"></p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
