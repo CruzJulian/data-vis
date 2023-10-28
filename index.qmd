@@ -1,6 +1,53 @@
 ---
-title: "data-vis"
+title: "Intro"
 ---
+
+
+```{r}
+library("reticulate")
+# reticulate::install_miniconda()
+use_python(file.path(miniconda_path(), "bin", "python3.11"))
+# py_install("pandas")
+# py_install("matplotlib")
+# py_install("seaborn")
+
+```
+
+
+```{r}
+library("knitr")
+opts_chunk$set(
+  fig.width = 6,
+  fig.height = 4,
+  message = FALSE,
+  warning = FALSE,
+  echo = TRUE,
+  results = "asis"
+)
+
+```
+
+
+
+# What is this
+
+This is a notebook for the use in a data visualization course.
+
+I dont have structured it yet. But I can link here some of the chapters.
+
+[Scatterplot](https://cruzjulian.github.io/data-vis/scatterplot/scatterplot.html)
+
+[Barplot](https://cruzjulian.github.io/data-vis/barplot/barplot.html)
+
+[Boxplot](https://cruzjulian.github.io/data-vis/boxplot/boxplot.html)
+
+[ecdf](https://cruzjulian.github.io/data-vis/ecdf/ecdf.html)
+
+[Kernel density](https://cruzjulian.github.io/data-vis/kernel-density/kernel-density.html)
+
+[Histogram](https://cruzjulian.github.io/data-vis/histogram/histogram.html)
+
+Here I will explain some things about visualizationa from my understanding. this work has a lot of opportunities for growing, be kind to inform mistakes and collaborate in the way you want.
 
 # Package graphics
 
@@ -141,6 +188,8 @@ Create a plot with:
 
 ```
 
+![Structure of a plot](structure-ggplot.jpeg)
+
 
 ```{r, eval = FALSE}
 ggplot(...) +
@@ -152,7 +201,7 @@ ggplot(...) +
 
 ```
 
-It is a cake.
+It is like a cake.
 
 ![Correct layer system of ggplot 2.](ggplot2_layer.jpeg)
 
@@ -172,6 +221,324 @@ Read the [ggplot2 cheat sheet](https://github.com/rstudio/cheatsheets/blob/main/
 For inspiration visit the [Top 50 ggplot2 Visualizations - The Master List](http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html) (With Full R Code)
 
 Searching expand the posibilities, visit the [ggplot2 extensions](https://exts.ggplot2.tidyverse.org/) page.
+
+## Basics
+
+
+
+```{r}
+library("ggplot2")
+library("magrittr")
+library("dplyr")
+
+diamonds %<>%
+  sample_n(5000) # disminuir los datos p
+
+
+# diamonds %>% 
+#   glimpse
+
+
+
+
+```
+
+
+
+### Layers
+
+```{r}
+ggplot() +
+  layer(
+    data = diamonds, 
+    mapping = aes(x = carat, y = price),
+    geom = "point", 
+    stat = "identity", 
+    position = "identity"
+    ) +
+  scale_y_continuous() +
+  scale_x_continuous() +
+  coord_cartesian() +
+  theme_minimal()
+
+
+```
+
+
+```{r}
+ggplot() +
+  layer(
+    data = mtcars, 
+    mapping = aes(x = mpg, y = cyl),
+    geom = "point", 
+    stat = "identity", 
+    position = "identity"
+    ) +
+  scale_y_continuous() +
+  scale_x_continuous() +
+  coord_cartesian() +
+  theme_minimal()
+
+```
+
+
+### Overlaping layers
+
+
+```{r}
+ggplot() +
+  layer(
+    data = diamonds, 
+    mapping = aes(x = carat, y = price),
+    geom = "point", 
+    stat = "identity", 
+    position = "identity"
+    ) +
+  layer(
+    data = mtcars, 
+    mapping = aes(x = mpg, y = cyl),
+    geom = "point", 
+    stat = "identity", 
+    position = "identity"
+    ) +
+  scale_y_continuous(name = "Y axis") +
+  scale_x_continuous(name = " X axis") +
+  coord_cartesian() +
+  theme_minimal()
+
+
+```
+
+
+### factorize data and mapping
+
+```{r}
+ggplot(
+  data = diamonds, 
+  mapping = aes(x = carat, y = price),
+) +
+  layer(
+    geom = "point", 
+    stat = "identity", 
+    position = "identity"
+  ) +
+  scale_y_continuous() +
+  scale_x_continuous() +
+  coord_cartesian() +
+  theme_minimal()
+
+
+
+```
+
+
+
+```{r}
+ggplot(
+  data = diamonds, 
+  mapping = aes(x = carat, y = price),
+) +
+  layer(
+    geom = "smooth", 
+    stat = "smooth", 
+    position = "identity",
+    params = list(se = TRUE, colour = "#ac4875")
+  ) +
+  scale_y_continuous() +
+  scale_x_continuous() +
+  coord_cartesian() +
+  theme_minimal()
+
+
+```
+
+
+
+
+```{r}
+ggplot(
+  data = diamonds, 
+  mapping = aes(x = carat, y = price),
+) +
+  layer(
+    geom = "point", 
+    stat = "identity", 
+    position = "identity"
+  ) +
+  layer(
+    geom = "smooth", 
+    stat = "smooth", 
+    position = "identity",
+    params = list(se = TRUE, colour = "#ac4875")
+  ) +
+  scale_y_continuous() +
+  scale_x_continuous() +
+  coord_cartesian() +
+  theme_minimal()
+
+
+```
+
+
+### geoms
+
+
+```{r}
+ggplot(
+  data = diamonds, 
+  mapping = aes(x = carat, y = price),
+) +
+  # layer(
+  #   geom = "point", 
+  #   stat = "identity", 
+  #   position = "identity"
+  # ) + 
+  geom_point() + # This line resumes the four ones below
+  layer(
+    geom = "smooth", 
+    stat = "smooth", 
+    position = "identity",
+    params = list(se = TRUE, colour = "#ac4875", method = "gam")
+  ) +
+  scale_y_continuous() +
+  scale_x_continuous() +
+  coord_cartesian() +
+  theme_minimal()
+
+
+```
+
+
+
+```{r}
+
+ggplot(
+  data = diamonds, 
+  mapping = aes(x = carat, y = price),
+) +
+  geom_point() +
+  # layer(
+  #   geom = "smooth", 
+  #   stat = "smooth", 
+  #   position = "identity",
+  #   params = list(se = TRUE, colour = "#ac4875", method = "gam")
+  # ) +
+  geom_smooth(colour = "#ac4875") +  # This line resumes the four ones below
+  scale_y_continuous(name = "Precio") +
+  scale_x_continuous(name = "Quilates") +
+  theme_minimal()
+
+
+```
+
+
+### most extended use
+
+```{r}
+ggplot(diamonds) +
+  aes(x = carat, y = price) + 
+  geom_point() +
+  stat_smooth(colour = "#ac4875") +
+  theme_minimal()
+
+```
+
+### Facets
+
+
+```{r}
+ggplot(diamonds) +
+  aes(x = carat, y = price) + 
+  geom_point() +
+  stat_smooth(colour = "#ac4875") +
+  facet_wrap(~ color) +
+  theme_minimal()
+
+```
+
+
+
+```{r}
+library("esquisse")
+# esquisser(data = diamonds)
+
+
+```
+
+
+
+```{r}
+ggplot(diamonds) +
+  aes(x = carat, y = price) +
+  geom_point(shape = "circle", size = 1.5, colour = "#112446") +
+  theme_minimal() +
+  facet_wrap(vars(color))
+
+
+```
+
+
+## Ejemplos
+
+```{r}
+ggplot(diamonds) + 
+  aes(x = carat, y = price, colour = color) + 
+  geom_point() 
+
+```
+
+```{r}
+ggplot(diamonds) + 
+  aes(x = cut, y = price, fill = color) + 
+  geom_boxplot()
+
+```
+
+
+```{r}
+diamonds %>% 
+  group_by(color) %>% 
+  summarise(carat_avg = mean(carat, na.rm = TRUE)) %>% 
+  ggplot() + 
+  aes(x = color, y = carat_avg) + 
+  geom_bar(stat = "identity") 
+
+```
+
+
+
+## Ejercicio
+
+Elabore las siguientes gráficas.
+
+```{r, echo=FALSE}
+ggplot(diamonds) +
+  aes(x = carat, y = price) +
+  geom_point(shape = "circle", size = 1.5, colour = "#112446") +
+  theme_minimal() 
+
+```
+
+
+```{r, echo=FALSE}
+ggplot(diamonds) +
+  aes(x = cut, y = price) +
+  geom_boxplot() +
+  theme_minimal() 
+
+```
+
+
+```{r, echo=FALSE,  fig.width = 6,  fig.height = 8}
+ggplot(diamonds) +
+  aes(x = price) +
+  geom_histogram() +
+  theme_minimal() +
+  facet_wrap(ncol = 1, vars(color))
+
+
+```
+
 
 
 # Matplotlib
@@ -195,9 +562,360 @@ Using the pylab module: By importing the library with the command from pylab imp
 
 Using the pyplot module: This is a state-based interface for Matplotlib, also similar to MATLAB. It automates the creation of the necessary instances for drawing the graph and is recommended for both interactive and static plotting. You can find more information and a list of functions in the matplotlib.pyplot module.
 
+![](matplotlib-structure.png)
+
+
 Using an object-oriented interface: This is the most complex method but offers more control. It allows the generation of advanced graphics because you have greater control over the code to create instances and apply methods to them. This approach is widely recommended for non-interactive graphic generation and can be easily integrated into functions and scripts within larger projects.
 
 ![](componentesgrafico.png)
+
+## Further reading
+
+Visit the [The Python Graph Gallery](https://python-graph-gallery.com/) for inspiration.
+
+Visit [the matplotlib documentation](https://matplotlib.org/stable/index.html), there are learning sources for begginers and advanced users.
+
+Read the complete guide of [Kaggle](https://www.kaggle.com/code/prashant111/matplotlib-tutorial-for-beginners). It can be helpful.
+
+## Basics 
+
+
+```{python}
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import matplotlib.colors
+
+# diamond=sns.load_dataset("diamonds", cache=True, data_home=None).sample(500)
+
+# You can uncomment this line to change the style of the graphs.
+# plt.style.use('ggplot')
+
+diamonds = r.diamonds # This line only works in r sessions
+
+
+
+
+```
+
+
+
+### Plot
+
+
+```{python}
+import matplotlib.pyplot as plt
+import numpy as np
+
+```
+
+
+```{python}
+x = diamonds["carat"]
+y = diamonds["price"]/1000
+z = diamonds["cut"]
+
+```
+
+
+```{python}
+plt.plot(x, y, 'b.')
+plt.show()
+plt.close()
+
+```
+
+```{python}
+plt.plot(x, y, 'rx')
+plt.show()
+plt.close()
+
+
+```
+
+```{python}
+plt.plot(x, y, 'go')
+plt.plot(y, x, 'go')
+plt.show()
+plt.close()
+
+
+```
+
+
+### Histograma
+
+```{python}
+plt.hist(x)
+plt.show()
+plt.close()
+
+
+```
+
+### Scatterplot
+
+```{python}
+plt.scatter(x, y)
+plt.show()
+plt.close()
+
+
+```
+
+### Pie
+
+```{python}
+z_count = z.value_counts()
+
+plot_01 = plt.pie(z_count, labels=z_count.index)
+plt.show()
+plt.close()
+
+
+```
+
+
+```{python}
+
+plot_01 = plt.pie(z_count)
+plt.plot(x, y, 'b.')
+plt.show()
+plt.close()
+
+
+```
+
+### Barplot
+
+```{python}
+plt.bar(z_count.index, z_count)
+plt.show()
+plt.close()
+
+
+```
+
+
+### Boxplot
+
+```{python}
+plot_01 = plt.boxplot(x)
+plt.show()
+plt.close()
+
+
+```
+
+
+### Subplot
+
+```{python}
+
+# subplot
+# # de filas
+# # de columnas
+# índice
+
+plt.subplot(1, 2, 1)
+plt.plot(x, y, 'r.')
+plt.subplot(1, 2, 2)
+plt.hist(y)
+plt.show()
+plt.close()
+
+
+```
+
+
+### Visualización orientada a objetos
+
+
+```{python}
+fig = plt.figure()
+axes = fig.add_axes([0.1, 0.1, 0.8, 0.8])
+axes.plot(x, y, "b.")
+plt.show()
+plt.close()
+
+```
+
+
+```{python}
+fig = plt.figure()
+axes = fig.add_axes([0.1, 0.1, 0.4, 0.5])
+axes.plot(x, y, "g.")
+plt.show()
+plt.close()
+
+```
+
+
+```{python}
+fig = plt.figure()
+axes1 = fig.add_axes([0.05, 0.05, .7, 0.7])
+axes1.scatter(x, y)
+axes2 = fig.add_axes([0.8, 0.05, 0.15, 0.7])
+axes2.boxplot(x)
+axes3 = fig.add_axes([0.05, 0.8, 0.7, 0.15])
+axes3.boxplot(y, vert=False)
+plt.show()
+plt.close()
+
+
+
+```
+
+
+### Subplots
+
+
+```{python}
+# fig = plt.figure()
+# axes = fig.add_axes([0.1, 0.1, 0.8, 0.8])
+fig, axes = plt.subplots(nrows = 1, ncols=2)
+axes[0].plot(x, y, 'b.')
+axes[1].plot(x, y, 'ro')
+plt.show()
+plt.close()
+
+
+```
+
+ 
+
+```{python}
+fig, [ax1, ax2] = plt.subplots(nrows = 1, ncols=2)
+ax1.plot(x, y, 'b.')
+ax2.plot(x, y, 'ro')
+plt.show()
+plt.close()
+
+
+```
+
+ 
+
+```{python}
+x0 = np.linspace(0, 5, 11)
+y1, y2, y3, y4, y5, y6 = np.sin(x0), np.cos(x0), np.tan(x0), x0, x0**2, x0**3
+
+fig, [[ax1, ax2, ax3], [ax4, ax5, ax6]] = plt.subplots(nrows = 2, ncols=3)
+
+ax1.plot(x0, y1)
+ax2.plot(x0, y2, 'ro')
+ax3.plot(x0, y3, 'gD')
+
+ax4.plot(x0, y4)
+ax5.plot(x0, y5, 'ro')
+ax6.plot(x0, y6, 'gD')
+
+fig.tight_layout()
+
+plt.show()
+plt.close()
+
+
+```
+
+
+### Leyendas, etiquetas, títulos, tamaño
+
+
+```{python, fig.width = 6,  fig.height = 6}
+fig, [ax1, ax2] = plt.subplots(nrows = 2, ncols=1)
+ax1.plot(x0, y1, 'g', label="sen(x)")
+ax1.set_title("Seno")
+ax1.set_xlabel("x")
+ax1.axhline()
+ax1.legend()
+ax2.plot(x0, y2, 'r', label="$cos(x)$")
+ax2.axhline()
+ax2.set_title("Coseno")
+ax2.set_xlabel("x")
+ax2.legend()
+fig.tight_layout()
+fig.set_figwidth(20)
+plt.show()
+plt.close()
+
+
+```
+
+
+```{python, fig.width = 6,  fig.height = 6}
+plt.subplot(2, 1, 1)
+plt.plot(x0, y1, 'g', label="sen(x)")
+plt.title("Seno")
+plt.xlabel("x")
+plt.axhline()
+plt.legend()
+# plt.legend(bbox_to_anchor = (1.3, 0.5))
+plt.subplot(2, 1, 2)
+plt.plot(x0, y2, 'r', label="$cos(x)$")
+plt.axhline()
+plt.title("Coseno")
+plt.xlabel("x")
+plt.legend()
+plt.tight_layout()
+plt.show()
+plt.close()
+
+```
+
+
+### Colores y estilos.
+
+```{python}
+print(plt.style.available)
+
+
+```
+
+
+```{python, fig.width = 6,  fig.height = 6}
+plt.style.use("ggplot")
+fig, [ax1, ax2] = plt.subplots(nrows = 2, ncols=1)
+# ax1.plot(x, y1, color="#ff00ff", alpha = 0.1, linewidth = 10)
+ax1.scatter(x0, y1, label="sen(x)", color="#ff00ff", alpha = 1, linewidth = 1, marker = "p")
+ax1.set_title("Seno")
+ax1.set_xlabel("x")
+ax1.axhline(color= "#9999aa")
+ax1.legend()
+ax2.plot(x0, y2, label="$cos(x)$", color="#ff0000")
+ax2.axhline(color= "#9999aa")
+ax2.set_title("Coseno")
+ax2.set_xlabel("x")
+ax2.legend()
+fig.tight_layout()
+fig.set_figwidth(20)
+plt.show()
+plt.close()
+
+
+```
+
+
+### Ejercicio
+Elabore las siguientes gráficas.
+
+```{python echo=FALSE,  fig.width = 8,  fig.height = 8}
+fig = plt.figure()
+axes1 = fig.add_axes([0.05, 0.05, .7, 0.7])
+axes1.scatter(x, y)
+axes2 = fig.add_axes([0.8, 0.05, 0.15, 0.7])
+axes2.hist(x, orientation = "horizontal")
+axes3 = fig.add_axes([0.05, 0.8, 0.7, 0.15])
+axes3.hist(y)
+plt.show()
+plt.close()
+
+
+
+```
+
+
 
 
 
@@ -224,250 +942,13 @@ Before you start creating any graphs with Seaborn, it's important to have a good
  - It includes tools for selecting color palettes to make your plots visually appealing and informative.
 
 
+Read the [datacamp tutorial](https://www.datacamp.com/tutorial/seaborn-python-tutorial)
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Preparando herramientas
-
-Instalamos y cargamos las librerías necesarias para ejecutar el análisis.
-
-```{python}
-# import numpy as np
-# import pandas as pd
-# import matplotlib.pyplot as plt
-# import seaborn as sns
-
-
-```
-
-## Alistar la información 
-
-Antes de comenzar a graficar es necesario preparar la información. Como siempre es necesario tener un claro entendimiento de los datos que se van a trabajar. 
-
-1. Alistar los datos: Se van a cargar los datos de: examen2, Iris y Breast cancer.
-
-# Generando gráficos con MATPLOTLIB
-
-## Gráficos mediante interfaz orientada a objetos: 
-
-Bajo este enfoque, es necesario crear cada una de las componentes del gráfico: primero la figura, luego definir el tipo de gráfico y los datos se van a visualizar junto a las demás especificaciones pertinentes como colores, etiquetas, rótulos, etc.
-
-Agregamos un "\;" al final del código para evitar obtener información adicional del código que no es de utilidad. Usamos el comando "\%matplotlib notebook" para hacer interactivo el gráfico y "%matplotlib inline" para hacerlo estático.
-
-#### Ejemplo 2  
-
-En procesos de análisis más complejos, esta forma de generar los gráficos puede simplificarse mediante el uso de funciones que contienen criterios preestablecidos para la generación de gráficos y que sólo dependan de la especificación de los datos. Por ejemplo: 
-
-
-### Generando gráficos mediante módulo pyplot: 
-
-Con esta herramienta, se simplifica la programación dado que las intancias del gráfico se generan automáticamente, aún así, es posible modificar y personalizar algunos elementos visuales del gráfico, como colores, estilos de línea y textos mediante la especificación de argumentos dentro de la función que genera el gráfico o apoyados en algunas funciones contenidas en el módulo.
-
-
-
-
-Es posible adicionar más series de datos a un mismo gráfico: 
-
-#### Ejemplo 2
-
-
-
-Cuando sólo declaramos una serie de datos, por defecto los valores son graficados en el eje y, mientras que en el eje x toman los valores de los índices correspondientes como en los ejemplos anteriores. Dentro de las opciones y estilos gráficos, Matplotlib permite especificar los colores desde distintos recursos, a continuación se relacionan algunos de ellos:
-
-| OPCIONES DE COLOR             |  CARACTERÍSTICAS                                                                                                                                                             |
-|-------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-| Ciclo de color predeterminado | Listado de colores categorizados desde "C0" a "C9", diseñados para generar un buen contraste entre categorías.                                                               |
-| Codificación hexadecimal      | Pueden listarse mediante el comando: "plt.rcParams['axes.prop_cycle']"                                                                                                       |
-| Colores básicos               | Puede accederse simplemente usando su abreviatura de una sola letra, ejemplo: 'b': Blue ; se dispone de los colores: blue, green, red, cyan, magenta, yellow, black y white. |
-| Nombres HTML estaándar.       | Permite crear una paleta de colores usando nombres estándar de la programación en HTML y que son compatibles con la librería.                                                |
-| RGB o RGBA                    | Especifica el color mediante tuplas de números que definen la mezcla de color que se desea y el nivel de transparencia. Ejemplo:"#ff0000" corresponde al rojo.               |
-| Escala de grises              | Especificando un valor entre 0 y 1, entre más pequeño es más oscuro el tono de gris.                                                                                         |
-| Mapas de color                | Asignan valores numericos a una escala de color, por defecto utiliza la paleta "viridis" que varía el espectro de color desde el amarillo hasta el azul.                     |
-
-
-
-
-#### Ejemplo 3 
-
-Un gráfico de gran utilidad cuando tratamos con datos categóricos es el gráfico de barras; basados en los datos de ejemplo, generamos un gráfico para el número de flores por especie. Para ampliar sobre los parametros disponibles en la función y consultar más ejemplos puede consultarse :[matplotlib.axes.Axes.bar](https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.bar.html#matplotlib.axes.Axes.bar).
-
-
-
-Otro gráfico descriptivo básico es el gráfico de dispersión, para los colores pueden especificarse paletas de color y seleccionarse formas para los puntos especificando un valor al parámetro "marker", para más detalle consultar: [matplotlib.axes.Axes.scatter](https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.scatter.html#matplotlib.axes.Axes.scatter).
-
-
-#### Ejemplo 6
-
-Se genera un histograma para las variables continuas de la base de datos. Más información en:  [matplotlib.axes.Axes.hist](https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.hist.html#matplotlib.axes.Axes.hist).
-
-
-
-#### Ejemplo 7
-
-Generemos ahora un gráfico boxplot, este tipo de gráficos presenta los cuartiles 25, 50 y 75, outliers y si se desea la media de los datos, permite tener una idea general de la variabilidad y sesgo de la variable; más detalles en [matplotlib.axes.Axes.boxplot](https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.boxplot.html#matplotlib.axes.Axes.boxplot).
-
-
-
-
-Agreguemos algunos detalles, probar la celda:
-
-plt.boxplot(x, vert=False, notch=True ,showmeans=True );
-
-
-
-
-#### Ejemplo 8
-
-Pueden graficarse varias variables, facilitando algunas comparaciones.
-
-
-Modificando algunos elementos visuales:
-
-
-
- # Generando gráficos con SEABORN
- 
- ## Gráficas de dispersión
-
-Las gráficas de dispersión se recomiendan para evidenciar relaciones entre variables y para mostrar la distribución de variables que generalmente son numéricas. En general, este es un buen primer paso para observar relaciones y distribución de los datos. 
-
-Seaborn dispone de la función __relplot__, la cual presenta variadas e interesantes parametrizaciones.
-
-
-### Ejemplo 1
-
-
-### Visualizar la clase
-
-Para tareas de clasificación resulta útil relacionar las variables con la clase. Para esto se agrega __hue__=_'variety' a la gráfica de dispersión, ahora se visualiza y se compara con el grafico anterior:
-
-Probar en esta celda
-
-sns.relplot(x="petal.length", y="sepal.length", hue='variety', data=dfi)
-
-Ejercicio
-Probemos ahora otras relaciones, como por ejemplo:
-
-- 'sepal.length' vs 'sepal.width'
-- 'petal.length' vs 'petal.width'
-- 'sepal.width' vs 'petal.width'
-
-
-
-Para observar todas las relaciones entre las variables continuas se puede usar una función que de Seborn que ejecuta automáticamente el análisis completo:
-
-# Función pairplot
-
-sns.pairplot(data=dfi, hue='variety')
-
-
-También es posible limitar el uso de las variables que se quieren analizar, esto es útil cuando son muchas variables.
-
-
-# Función pairplot
-sns.pairplot(data=dfi, hue='variety',vars=['sepal.length', 'petal.length'])
-
-
-
-
-### Ejercicio 2
-
-1. Ahora utilice el dataframe de Breast Cancer (dfc) para analizar la relación entre 5 variables, en las que usted piense que hay relación. (recomendación no intente ejecutar con todas las variables por que se va a tardar mucho el procesamiento)
-
-2. Analice que variables del dtaframe examen2 se pueden visualizar de esta forma?
-
-
-
-
-### Otras opciones de visualización de gráficas dispersas
-
-Varias dimensiones se pueden visualizar en una gráfica de dispersión
-- $x$ variable numérica (puede tener múltiples valores)
-- $y$ variable numérica
-- $hue$ variable categórica (agrupa)
-- $size$ diferentes tamaños de la burbuja, variable numérica 
-- $style$ pone marcas diferentes, variable categórica (agrupa)
-- $col$ organiza filtros por columna, variable categórica (filtra)
-- $row$ organiza filtros por fila, variable categórica (filtra)
-
-
-
-#### Ejemplo
-
-
-
-
-# Probar y analizar
-
-
-
-## Gráficos de líneas
-
-Generalmente cuando se tienen una o muchas variable numéricas que dependen de una variable independiente y ordenada (como por ejemplo el tiempo), lo ideal es realizar gráficos de líneas. En estos gráficos se pueden representar y comparar fácilmente varias series de datos, así como también mostrar comportamientos asociados a la variable independiente.
-
-Cuando se tienen múltiples valores de la serie por cada valor de la varaiable independiente, se  gráfica de manera automática el intervalo de confianza del 95% calculado usando el método de bootstrapping. 
-
-
-
-#### opciones de gráfico
-
-Al igual que los gráficos de dispersión la función permite usar múltiples parámetros para mejorar la visualización e incluir más dimensiones en el análisis. 
-
-#### Ejemplo
-
-Agregue los siguiente a la gráfica:
-- style="jornada"
-- row="programa"
-- markers=True
-
-Observe lo que pasa y haga un análisis del resultado.
-
-
-
-
-
-
-### Ejercicio
-
-Analize y describa las siguientes gráficas. 
-
-
-
-
-#### Descripción de la gráfica 2
-
-
-1. Cómo llamaría esta gráfica
-2. Describa lo que hacen cada uno  de los parámetros usados
-3. Realice un análisis de lo que aporta esta gráfica
 
 
 

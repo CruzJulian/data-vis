@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Empirical Cumulative Distribution Function (ECDF)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="ecdf_files/libs/clipboard/clipboard.min.js"></script>
+<script src="ecdf_files/libs/quarto-html/quarto.js"></script>
+<script src="ecdf_files/libs/quarto-html/popper.min.js"></script>
+<script src="ecdf_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="ecdf_files/libs/quarto-html/anchor.min.js"></script>
+<link href="ecdf_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="ecdf_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="ecdf_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="ecdf_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="ecdf_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Empirical Cumulative Distribution Function (ECDF)</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="fist-explanation" class="level1">
+<h1>Fist explanation</h1>
+<p>An Empirical Cumulative Distribution Function (ECDF) is a visualization tool that provides insight into the distribution of a dataset. It represents the cumulative distribution of the data’s values. An ECDF plot is constructed by ordering the data points and plotting them as a step function. This visual representation offers a detailed view of how data is spread across various values.</p>
+<section id="about-the-ecdf-visualization" class="level2">
+<h2 class="anchored" data-anchor-id="about-the-ecdf-visualization">About the ecdf visualization</h2>
+<p>The ecdf plot shows the entire range of values in your dataset on the x-axis, and as you move along the x-axis from left to right, the y-axis represents the proportion of data points that fall below each value. Therefore, the ECDF starts at 0 on the y-axis (indicating no data points are less than the minimum value) and ends at 1 (indicating all data points are less than or equal to the maximum value).</p>
+<p>To create a univariate ECDF, you follow these steps:</p>
+<ul>
+<li><p>Sort the data in ascending order.</p></li>
+<li><p>For each unique data point, calculate the proportion of data points that are less than or equal to it.</p></li>
+<li><p>Plot the unique data points on the x-axis and their corresponding cumulative proportions on the y-axis. Connect these points with steps.</p></li>
+</ul>
+<p>Bivariate and Multivariate ECDF: While the standard ECDF focuses on a single variable, bivariate and multivariate ECDFs expand this concept to two or more variables. This allows you to explore relationships between variables. To perform a bivariate ECDF, using two variables, you plot points on a 2D plane. The x-axis represents one variable, and the y-axis represents the other. The points’ positions indicate the cumulative distribution of the two variables. Extending to more than two variables is challenging but possible. You can use color or size to represent additional dimensions or use multiple plots to explore different combinations. Bivariate or multivariate ECDF is not an usual practice.</p>
+<p>ECDF visualization can be applied to a numerical Variables: For exploring the distribution of continuous data like age, income, or temperature. The application to categorical variables, time series data and geospatial data remains experimental.</p>
+<p>The ECDF allows you to make several observations about the data:</p>
+<ul>
+<li><p>The shape of the ECDF provides insights into the distribution. Steep sections indicate where the data is densely populated, while flat sections suggest data sparsity.</p></li>
+<li><p>Percentiles, such as the median, can be read directly from the plot. For example, the median is where the ECDF crosses 0.5 on the y-axis.</p></li>
+<li><p>By comparing multiple ECDFs, you can understand differences between datasets.</p></li>
+</ul>
+<p>ECDFs are useful for comparing distributions, assessing the spread of data, identifying central tendencies, and detecting the presence of outliers. They are a valuable tool in data exploration, statistical analysis, and decision-making processes.</p>
+</section>
+<section id="visual-alphabet" class="level2">
+<h2 class="anchored" data-anchor-id="visual-alphabet">Visual alphabet</h2>
+<p>The visual alphabet of an ECDF (Empirical Cumulative Distribution Function) plot can be explained in terms of various graphical aspects, which help convey information effectively:</p>
+<p><strong>Multiplicity:</strong> The ECDF plot usually consists of one or more lines representing different datasets. Multiplicity is evident when multiple lines or datasets are present, enabling comparisons.</p>
+<p><strong>Position:</strong> The x-axis represents the position of data values. As you move along the x-axis, the ECDF shows the position of data values and how many values fall below or are equal to a specific point.</p>
+<p><strong>Length:</strong> The length of the plot along the x-axis represents the range of values in the dataset. Longer plots indicate datasets with broader value ranges.</p>
+<p><strong>Angle:</strong> ECDF plots typically do not rely on angles to convey information. The primary graphical feature is the step-like progression of data points on the plot.</p>
+<p><strong>Area:</strong> While ECDFs don’t emphasize area as a primary visual encoding, the shape of the curve formed by the steps gives a sense of density in specific value ranges. A steep section may indicate a high density of data points.</p>
+<p><strong>Color:</strong> Color can be used to distinguish multiple datasets or to emphasize specific data points or ranges. Color can aid in highlighting patterns and relationships when multiple ECDFs are plotted together.</p>
+<p><strong>Opacity:</strong> Opacity (transparency) can be used to make overlapping data points more visible when multiple datasets are plotted on the same graph. It can help reduce overplotting.</p>
+<p><strong>3D:</strong> ECDFs are typically 2D plots. However, you can represent additional dimensions by using color or size to show variations along a third dimension, effectively simulating 3D-like effects. 3D ECDF is not commonly used. The primary focus is on the visual aspects of position, length, and shape.</p>
+<p><strong>Shape:</strong> The primary shape in an ECDF plot is the step function, created by connecting data points with vertical and horizontal lines. The shape of this step function reveals the cumulative distribution of the data.</p>
+<p><strong>Texture:</strong> Texture is not commonly used in ECDF plots. The primary focus is on the visual aspects of position, length, and shape.</p>
+<p><strong>Orientation:</strong> The orientation of an ECDF plot is typically horizontal or vertical, depending on how data values are placed on the x-axis. Horizontal ECDFs can be useful when you have a limited horizontal space or when comparing datasets with different units or scales.</p>
+</section>
+</section>
+<section id="programming" class="level1">
+<h1>Programming</h1>
+<p>First we can configure the environment for mixed programming. Using another engine will need another setup.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"reticulate"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># reticulate::install_miniconda()</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">use_python</span>(<span class="fu">file.path</span>(<span class="fu">miniconda_path</span>(), <span class="st">"bin"</span>, <span class="st">"python3.11"</span>))</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># py_install("pandas")</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># py_install("matplotlib")</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># py_install("seaborn")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"knitr"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>opts_chunk<span class="sc">$</span><span class="fu">set</span>(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">fig.width =</span> <span class="dv">6</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">fig.height =</span> <span class="dv">4</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">message =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">warning =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">echo =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">results =</span> <span class="st">"asis"</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggplot2"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"magrittr"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"dplyr"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">%&lt;&gt;%</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="dv">5000</span>) <span class="co"># disminuir los datos p</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># diamonds %&gt;% </span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   glimpse</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.colors</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># You can uncomment this line to change the style of the graphs.</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.style.use('ggplot')</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>diamonds <span class="op">=</span> r.diamonds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="using-r-base" class="level2">
+<h2 class="anchored" data-anchor-id="using-r-base">Using r-base</h2>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">ecdf</span>(diamonds[[<span class="st">"price"</span>]]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="ecdf_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="576"></p>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using pipe notation</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># diamonds %&gt;% </span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   pull(price) %&gt;% </span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   ecdf %&gt;% </span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Step-by-Step Breakdown:</p>
+<p><strong>diamonds[[“price”]]:</strong> This part of the code accesses the “diamonds” dataset and selects the “price” column. The double square brackets [[ ]] are used to extract the data from that specific column, resulting in a numeric vector of diamond prices.</p>
+<p><strong>ecdf(diamonds[[“price”]]):</strong> The ecdf() function is applied to the “price” column. It creates an ECDF object that represents the empirical cumulative distribution of the prices in the dataset. This object stores information about how many data points are less than or equal to each unique value in the “price” column.</p>
+<p><strong>plot(ecdf(diamonds[[“price”]])):</strong> The plot() function is used to create a plot of the ECDF object created in the previous step. It generates the ECDF plot, with the x-axis showing the unique values of diamond prices, and the y-axis showing the cumulative proportion of prices below or equal to each value.</p>
+</section>
+<section id="using-ggplot" class="level2">
+<h2 class="anchored" data-anchor-id="using-ggplot">Using ggplot</h2>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds) <span class="sc">+</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> price) <span class="sc">+</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">stat=</span><span class="st">"ecdf"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="ecdf_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="576"></p>
+<p>Step-by-Step Breakdown:</p>
+<p><strong>ggplot(diamonds):</strong> This part initializes a ggplot2 plot using the “diamonds” dataset. In the ggplot2 framework, you begin with the ggplot() function and specify the dataset you want to use for the plot, in this case, “diamonds.”</p>
+<p><strong>aes(x = price):</strong> The aes() function is used to specify aesthetic mappings. It tells ggplot2 how to map the data to the plot’s visual properties. In this case, x = price means that the “price” column from the “diamonds” dataset is mapped to the x-axis of the plot. This is the variable for which the ECDF will be calculated.</p>
+<p><strong>geom_line(stat=“ecdf”):</strong> This line adds the geometric element to the plot. The geom_line() function is used to create a line plot. The stat=“ecdf” argument specifies that the line should represent the ECDF of the “price” variable. This means it will show the cumulative distribution of diamond prices.</p>
+</section>
+<section id="using-pandas" class="level2">
+<h2 class="anchored" data-anchor-id="using-pandas">Using pandas</h2>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>diamonds.price.hist(cumulative<span class="op">=</span><span class="va">True</span>, density<span class="op">=</span><span class="dv">1</span>, bins<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="ecdf_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="576"></p>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>plt.close()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>pandas plotting summary</p>
+<p><strong>diamonds.price</strong> is assumed to be a variable representing a dataset of diamond prices.</p>
+<p><strong>.hist():</strong> This is a method used with Pandas DataFrames to create a histogram.</p>
+<ul>
+<li><p><strong>cumulative=True:</strong> This parameter specifies that a cumulative histogram should be generated instead of a standard histogram. A cumulative histogram shows the cumulative distribution of the data, indicating how many data points are less than or equal to a particular value.</p></li>
+<li><p><strong>density=1:</strong> Setting this parameter to 1 normalizes the histogram so that the area under the histogram equals 1. This is often used to ensure that the cumulative histogram represents proportions or probabilities.</p></li>
+</ul>
+<p><strong>plt.show():</strong> This line is used to display the cumulative histogram plot on the screen. It is typically necessary to visualize the plot in an interactive environment like Jupyter Notebook or a Python IDE.</p>
+<p><strong>plt.close():</strong> This line is used to close the current plot or figure. It’s a good practice to close plots explicitly after displaying them to free up resources and ensure that subsequent plots are displayed separately.</p>
+</section>
+<section id="using-seaborn" class="level2">
+<h2 class="anchored" data-anchor-id="using-seaborn">Using seaborn</h2>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>sns.ecdfplot(x <span class="op">=</span> <span class="st">"price"</span>, data <span class="op">=</span> diamonds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="ecdf_files/figure-html/unnamed-chunk-8-3.png" class="img-fluid" width="576"></p>
+<p>Explanation of seaborn use</p>
+<p><strong>sns.ecdfplot():</strong> This is a function provided by the Seaborn library for creating ECDF plots. It is used to create a plot that shows the empirical cumulative distribution of a variable.</p>
+<p><strong>x=“price”:</strong> This parameter specifies the variable that you want to analyze and plot as an ECDF. In this case, “price” is the variable from the “diamonds” dataset that will be used.</p>
+<p><strong>data=diamonds:</strong> The data parameter specifies the dataset that contains the variable you want to plot. Here, “diamonds” is assumed to be a dataset.</p>
+</section>
+<section id="using-matplotlib" class="level2">
+<h2 class="anchored" data-anchor-id="using-matplotlib">Using matplotlib</h2>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>plt.hist(diamonds[<span class="st">"price"</span>], cumulative<span class="op">=</span><span class="va">True</span>, density<span class="op">=</span><span class="dv">1</span>, bins<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="ecdf_files/figure-html/unnamed-chunk-9-5.png" class="img-fluid" width="576"></p>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>plt.close()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>How it works</p>
+<p><strong>plt.hist():</strong> This is a function provided by the Matplotlib library for creating histograms.</p>
+<p><strong>diamonds[“price”]:</strong> This part assumes that “diamonds” is a dataset, and you are accessing the “price” column. This is the data you want to create a histogram for.</p>
+<p><strong>cumulative=True:</strong> This parameter specifies that a cumulative histogram should be generated instead of a standard histogram. A cumulative histogram shows the cumulative distribution of the data, indicating how many data points are less than or equal to a particular value.</p>
+<p><strong>density=1:</strong> Setting this parameter to 1 normalizes the histogram so that the area under the histogram equals 1. This is often used to ensure that the cumulative histogram represents proportions or probabilities.</p>
+<p><strong>bins=100:</strong> The bins parameter specifies the number of bins or intervals used to divide the data range. In this case, 100 bins are used to create a detailed representation of the data distribution.</p>
+<p><strong>plt.show():</strong> This line is used to display the cumulative histogram plot on the screen. It is typically necessary to visualize the plot in an interactive environment like Jupyter Notebook or a Python IDE.</p>
+<p><strong>plt.close():</strong> This line is used to close the current plot or figure. It’s a good practice to close plots explicitly after displaying them to free up resources and ensure that subsequent plots are displayed separately.</p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

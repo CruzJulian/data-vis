@@ -124,8 +124,6 @@ import matplotlib.colors
 diamonds = r.diamonds
 
 
-
-
 ```
 
 
@@ -258,7 +256,7 @@ Together, tb.index.to_list() provides the x-axis (categories), and tb.values pro
 
 **`plt.show()`:** This line displays the barplot using Matplotlib. Once you've created the plot with plt.bar(), you use plt.show() to render and display the plot.
 
-In summary, the code generates a basic barplot using Matplotlib, displaying the distribution of counts or frequencies of different categories. The x-axis represents the categories (retrieved from the index of the tb Series), and the y-axis represents the counts (retrieved from the values of the tb Series). This type of barplot is useful for visualizing and comparing d
+In summary, the code generates a basic barplot using Matplotlib, displaying the distribution of counts or frequencies of different categories. The x-axis represents the categories (retrieved from the index of the tb Series), and the y-axis represents the counts (retrieved from the values of the tb Series).
 
 ## Comments
 
