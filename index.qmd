@@ -232,7 +232,7 @@ library("magrittr")
 library("dplyr")
 
 diamonds %<>%
-  sample_n(5000) # disminuir los datos p
+  sample_n(5000) # obtener una muestra de los datos
 
 
 # diamonds %>% 
@@ -478,7 +478,7 @@ ggplot(diamonds) +
 ```
 
 
-## Ejemplos
+## Examples
 
 ```{r}
 ggplot(diamonds) + 
@@ -507,9 +507,9 @@ diamonds %>%
 
 
 
-## Ejercicio
+## Exercise
 
-Elabore las siguientes gráficas.
+Generate the following charts.
 
 ```{r, echo=FALSE}
 ggplot(diamonds) +
@@ -543,6 +543,7 @@ ggplot(diamonds) +
 
 # Matplotlib
 
+![Use of visualization libraries](structure.png)
 
 Matplotlib is a versatile and robust tool for creating high-quality, customizable graphics. While it is a Python library, it can also be used in other environments like Jupyter Notebook. It is compatible with common data analysis packages such as Pandas and NumPy, and it serves as the foundation for more advanced packages used for visualization and analysis, such as Seaborn, HoloViews, Basemap, GeoPandas, and Canopy.
 
@@ -577,6 +578,11 @@ Visit [the matplotlib documentation](https://matplotlib.org/stable/index.html), 
 
 Read the complete guide of [Kaggle](https://www.kaggle.com/code/prashant111/matplotlib-tutorial-for-beginners). It can be helpful.
 
+Download the [Datacamp matplotlib cheat sheet](https://res.cloudinary.com/dyd911kmh/image/upload/v1676360378/Marketing/Blog/Matplotlib_Cheat_Sheet.pdf)
+
+![Datacamp matplotlib cheat sheet](matplotlib-datacamp-cheat-sheet.png)
+
+
 ## Basics 
 
 
@@ -587,12 +593,12 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import matplotlib.colors
 
-# diamond=sns.load_dataset("diamonds", cache=True, data_home=None).sample(500)
+# diamond=sns.load_dataset("diamonds", cache=True, data_home=None).sample(5000)
 
 # You can uncomment this line to change the style of the graphs.
 # plt.style.use('ggplot')
 
-diamonds = r.diamonds # This line only works in r sessions
+diamonds = r.diamonds # This line only works in rstudio sessions
 
 
 
@@ -605,16 +611,17 @@ diamonds = r.diamonds # This line only works in r sessions
 
 
 ```{python}
-import matplotlib.pyplot as plt
-import numpy as np
+x = diamonds["carat"]
+y = diamonds["price"]/1000
+z = diamonds["cut"]
 
 ```
 
 
 ```{python}
-x = diamonds["carat"]
-y = diamonds["price"]/1000
-z = diamonds["cut"]
+plt.plot(x, y, color = 'b', marker = ".", linestyle = "none")
+plt.show()
+plt.close()
 
 ```
 
@@ -644,7 +651,7 @@ plt.close()
 ```
 
 
-### Histograma
+### Histogram
 
 ```{python}
 plt.hist(x)
@@ -729,7 +736,7 @@ plt.close()
 ```
 
 
-### Visualización orientada a objetos
+### Object oriented use
 
 
 ```{python}
@@ -745,20 +752,23 @@ plt.close()
 ```{python}
 fig = plt.figure()
 axes = fig.add_axes([0.1, 0.1, 0.4, 0.5])
-axes.plot(x, y, "g.")
+axes.plot(x, y, "gv")
 plt.show()
 plt.close()
 
 ```
 
 
+
+
+
 ```{python}
 fig = plt.figure()
-axes1 = fig.add_axes([0.05, 0.05, .7, 0.7])
+axes1 = fig.add_axes([0.1, 0.1, .65, 0.65])
 axes1.scatter(x, y)
-axes2 = fig.add_axes([0.8, 0.05, 0.15, 0.7])
+axes2 = fig.add_axes([0.8, 0.1, 0.15, 0.65])
 axes2.boxplot(x)
-axes3 = fig.add_axes([0.05, 0.8, 0.7, 0.15])
+axes3 = fig.add_axes([0.1, 0.8, 0.65, 0.15])
 axes3.boxplot(y, vert=False)
 plt.show()
 plt.close()
@@ -768,7 +778,27 @@ plt.close()
 ```
 
 
-### Subplots
+```{python}
+
+cut_groups = diamonds.groupby("cut")
+
+fig = plt.figure()
+axes = fig.add_axes([0.1, 0.1, .8, 0.8])
+
+for group_name, group_df in cut_groups:
+    axes.scatter(group_df["carat"], group_df["price"], label = group_name, linestyle = "", marker = ".")
+
+plt.legend()
+plt.show()
+plt.close()
+
+```
+
+
+
+
+
+### Subplots is not subplot
 
 
 ```{python}
@@ -783,10 +813,24 @@ plt.close()
 
 ```
 
+
+```{python}
+colors = {'Fair':'blue', 'Good':'orange', 'Very Good':'green', 'Premium':'red', 'Ideal':'purple'}
+
+fig, ax = plt.subplots()
+grouped = diamonds.groupby('cut')
+for key, group in grouped:
+    group.plot(ax=ax, kind='scatter', x='carat', y='price', label=key, color=colors[key])
+plt.legend()
+plt.show()
+plt.close()
+
+```
+
  
 
 ```{python}
-fig, [ax1, ax2] = plt.subplots(nrows = 1, ncols=2)
+fig, [ax1, ax2] = plt.subplots(nrows = 1, ncols=2, sharey = True)
 ax1.plot(x, y, 'b.')
 ax2.plot(x, y, 'ro')
 plt.show()
@@ -795,7 +839,7 @@ plt.close()
 
 ```
 
- 
+
 
 ```{python}
 x0 = np.linspace(0, 5, 11)
@@ -820,7 +864,31 @@ plt.close()
 ```
 
 
-### Leyendas, etiquetas, títulos, tamaño
+### Figure information
+
+
+```{python}
+fig = plt.figure()
+axes1 = fig.add_axes([0.1, 0.1, .65, 0.65])
+axes1.scatter(x, y)
+axes2 = fig.add_axes([0.8, 0.1, 0.15, 0.65])
+axes2.boxplot(x)
+axes3 = fig.add_axes([0.1, 0.8, 0.65, 0.15])
+axes3.boxplot(y, vert=False)
+axes1.set_xlabel("Carat")
+axes1.set_ylabel("Price")
+axes2.set_xticks([])
+axes2.set_yticks([])
+axes3.set_xticks([])
+axes3.set_yticks([])
+plt.show()
+plt.close()
+
+
+
+```
+
+
 
 
 ```{python, fig.width = 6,  fig.height = 6}
@@ -865,7 +933,7 @@ plt.close()
 ```
 
 
-### Colores y estilos.
+### Decoration
 
 ```{python}
 print(plt.style.available)
@@ -897,8 +965,9 @@ plt.close()
 ```
 
 
-### Ejercicio
-Elabore las siguientes gráficas.
+### Exercise
+
+Generate the following charts.
 
 ```{python echo=FALSE,  fig.width = 8,  fig.height = 8}
 fig = plt.figure()
@@ -914,9 +983,6 @@ plt.close()
 
 
 ```
-
-
-
 
 
 # Seaborn
@@ -941,18 +1007,338 @@ Before you start creating any graphs with Seaborn, it's important to have a good
 
  - It includes tools for selecting color palettes to make your plots visually appealing and informative.
 
+## Visual-Oriented Graphic Functions
 
-Read the [datacamp tutorial](https://www.datacamp.com/tutorial/seaborn-python-tutorial)
+Seaborn's strengths lie in its visual-oriented graphic functions, which allow you to create visually appealing plots that convey insights from your data. These functions are specifically designed to handle different types of data and visualization tasks. Let's explore the key functions you mentioned:
+
+**displot** (short for "distribution plot"). It is used for visualizing the distribution of a single numerical variable. With displot, you can create various types of plots, such as histograms, kernel density estimates (KDE), and empirical cumulative distribution function (ECDF) plots. This helps you gain insights into the shape, spread, and central tendencies of your data.
+
+**relplot**, short for "relationship plot," is used to visualize the relationship between two numerical variables. This function can generate scatter plots, line plots, and other visualizations to depict how two numeric variables are related. It is especially useful for exploring patterns, correlations, and trends in the data.
+
+**catplot**, or "categorical plot," is primarily used for creating visualizations involving categorical variables. Categorical variables represent different categories or groups, and catplot can generate various types of plots like bar plots, box plots, and violin plots. These plots help you understand the distribution and relationships within your categorical data.
+
+**jointplot** is used for bivariate visualization. It allows you to explore the relationship between two numerical variables simultaneously. This function creates a scatterplot of the two variables along with histograms or density estimates for each variable on the margins. This makes it easier to understand the joint distribution of the variables and identify patterns, correlations, or clusters.
+
+## How it works
+
+The basic usage of seaborn is:
+
+```{python, eval = FALSE}
+
+# Basic structure
+
+sns.visualization-geometry(
+  data="Dataset",
+  x="X axis var",
+  y="Y axis var",
+  hue="Color var"
+  )
+
+# Visual oriented function
+
+sns.type-of.visualization(
+  data="Dataset",
+  x="X axis var",
+  y="Y axis var",
+  hue="Color var",
+  kind = "visualization-geometry",
+  col = "Column faceting var",
+  row = "Row faceting var"
+)
 
 
 
+```
+
+## Further reading
+
+Read the [Datacamp tutorial](https://www.datacamp.com/tutorial/seaborn-python-tutorial)
+
+Read the [Documentation of Seaborn](https://seaborn.pydata.org/)
+
+Visit the [The Python Graph Gallery](https://python-graph-gallery.com/) for inspiration.
+
+## Basics
+
+```{python}
+sns.scatterplot(x="carat", y = "price", data = diamonds) #oriented to data manipulation
+
+```
+
+### Count plot
+
+```{python}
+sns.countplot(x = "cut", data = diamonds)
+
+```
+
+
+```{python}
+# sns.set(color_codes=True)
+
+cut_percent = (diamonds["cut"]
+.value_counts(normalize=True)
+.rename('percent')
+.reset_index())
+
+sns.barplot(x="cut",y="percent", data = cut_percent)
+
+```
+### Histogram
+
+```{python}
+sns.histplot(x = "price", data = diamonds)
+
+```
+
+
+```{python}
+sns.histplot(x = "price", hue="color", data = diamonds)
+
+```
+
+```{python}
+sns.histplot(x = "price", data = diamonds, stat="percent")
+
+```
+
+
+```{python}
+sns.histplot(x = "price", hue="color", data = diamonds, stat = "probability")
+
+```
+
+### Kernel density estimation
+
+```{python}
+sns.kdeplot(x = "price", data = diamonds)
+
+```
+
+
+```{python}
+sns.kdeplot(x = "price", hue="color", data = diamonds)
+
+```
+
+### Empirical Cumulative Distribution Function
+
+```{python}
+sns.ecdfplot(x = "price", data = diamonds)
+
+```
+
+
+```{python}
+sns.ecdfplot(x = "price", hue="color", data = diamonds)
+
+```
+
+### Distribution plots
+
+```{python}
+sns_gr = sns.displot(x = "price", data = diamonds, kind = "hist")
+
+
+```
+
+
+```{python,  fig.width = 8,  fig.height = 8}
+sns_gr = sns.displot(x = "price", data = diamonds, kind = "hist", row = "cut")
+
+
+```
+
+
+```{python,  fig.width = 8,  fig.height = 8}
+sns_gr = sns.displot(x = "price", data = diamonds, kind = "kde", col = "cut")
+
+
+```
+
+
+```{python,  fig.width = 8,  fig.height = 8}
+sns_gr = sns.displot(x = "price", hue = "color",data = diamonds, kind = "ecdf", col = "cut")
+
+
+```
+
+
+### Scatterplot
+
+```{python}
+sns.scatterplot(x="carat", y = "price", data = diamonds) 
+
+```
+
+```{python}
+sns.scatterplot(x="carat", y = "price", hue = "cut", data = diamonds) 
+
+```
+
+### Line plot
+
+```{python}
+x0 = np.linspace(0, 5, 11)
+y0 = np.sin(x0)
+
+sns.lineplot(x = x0, y = y0) 
+
+```
+
+### Relational plot
+
+```{python}
+sns_gr = sns.relplot(x = x0, y = y0, kind = "line") 
+
+
+```
+
+```{python}
+sns_gr = sns.relplot(x="carat", y = "price", data = diamonds, kind = "scatter") 
+
+```
 
 
 
+```{python}
+sns_gr = sns.relplot(
+  x="carat", 
+  y = "price", 
+  data = diamonds, 
+  kind = "scatter",
+  row = "cut"
+  ) 
+
+```
+
+
+```{python}
+sns_gr = sns.relplot(
+  x="carat", 
+  y = "price", 
+  data = diamonds, 
+  kind = "scatter",
+  col = "color"
+  ) 
+
+```
+
+
+### cat plots
+
+```{python}
+sns_gr = sns.catplot(
+  x="cut", 
+  y = "price", 
+  data = diamonds,
+  hue = "color"
+  ) 
+
+
+```
+
+```{python}
+sns_gr = sns.catplot(
+  x="cut", 
+  y = "price", 
+  data = diamonds,
+  hue = "color",
+  dodge = True
+  ) 
+
+
+```
+
+
+```{python}
+sns_gr = sns.catplot(
+  x="cut", 
+  y = "price", 
+  data = diamonds,
+  hue = "color",
+  kind = "bar",
+  dodge = True
+  ) 
+
+
+```
 
 
 
+```{python}
+sns_gr = sns.catplot(
+  x="cut", 
+  y = "price", 
+  data = diamonds,
+  hue = "color",
+  kind = "violin",
+  dodge = True
+  ) 
+
+```
 
 
 
+### joint plots
+
+```{python}
+sns.jointplot(x="carat", y = "price", data = diamonds)
+
+```
+
+
+```{python}
+sns.jointplot(x="carat", y = "price", data = diamonds, kind = "kde")
+
+```
+
+
+```{python}
+sns.jointplot(x="carat", y = "price", data = diamonds, kind = "hist")
+
+```
+
+
+```{python}
+sns.jointplot(x="carat", y = "price", data = diamonds, kind = "reg")
+
+```
+
+
+
+```{python}
+sns.jointplot(x="carat", y = "price", hue = "color", data = diamonds)
+
+```
+
+## Exercise
+
+Generate the following charts.
+
+```{python echo=FALSE}
+sns_gr = sns.catplot(
+  x="cut", 
+  y = "price", 
+  data = diamonds,
+  hue = "color",
+  kind = "box",
+  dodge = True
+  ) 
+
+
+```
+
+```{python echo=FALSE}
+sns_gr = sns.displot(
+  x = "price", 
+  data = diamonds,
+  hue = "color",
+  row = "color",
+  kind = "kde",
+  fill = True
+  )
+
+
+```
 
